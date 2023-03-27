@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plag Checker | Compare Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+    <link href="{% static 'pc/stylesDocCheck.css' %}" rel="stylesheet" type="text/css">
+    <style>
+        body{
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+          font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+        }
+        nav{
+          background-color:rgb(255, 255, 255);
+        }
+        .text-content{
+      font-size: 20px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+    
+
+</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:#000000; font-size: 40px; font-weight: bolder;" href="{% url 'plagiarism-check-mainpage' %}"> <i class="bi bi-clipboard-check-fill"></i> Plag Checker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav" style="margin-left: auto;">
+                <li class="nav-item nav-one">
+                    <a style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link  btn btn-warning" href="{% url 'plagiarism-check-mainpage' %}">Text Plagiarism  <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item nav-two">
+                    <a style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link  btn btn-info" href="{% url 'compare' %}">Compare Documents</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container content-1">
+        <div class="text-content">
+            <h3 style="font-weight: bold;">Choose two files of same type to compare or enter contents to compare!</h3>
+            <div class="row">
+                <div class="col-md-5 tab-content-2">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="text-tab-2" data-toggle="tab" href="#text-input-dc-1" role="tab"
+                                aria-controls="text-input-ws" aria-selected="true">Text</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="text-input-dc-1" role="tabpanel"
+                            aria-labelledby="text-tab-2">
+                            <form id="form1-ws" action="/twofiletest1/" method="POST">
+                                {% csrf_token %}
+                                <textarea id="text-in-1" name="q1" required></textarea><br>
+                                <textarea id="text-1" name="q2" required></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 tab-content-2">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="file-tab-3" data-toggle="tab" href="#file-input-dc-2" role="tab"
+                                aria-controls="file-input-ws" aria-selected="true">File Upload</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="file-input-dc-2" role="tabpanel" aria-labelledby="file-tab-3">
+                            <form id="form2-ws" action="/twofilecompare1/" enctype="multipart/form-data" method="POST">
+                                {% csrf_token %}
+                                <input type="file" class="fileupload" id="fileupload" name="docfile1" required="True">
+                                <input type="file" class="fileupload" id="fileupload" name="docfile2" required="True">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row button-align">
+                <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6;">Compare The Texts</button>
+                <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6;">Compare The Files</button>
+            </div>
+            <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
+            <ul style="text-align: center;margin-left: 450px;">
+                <li class="output-per" style="list-style:none">{{ result }}%</li>
+                
+            </ul>
+
+        </div>
+        
+    </div>
+    <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;" class="container-fluid d-flex justify-content-between flex-wrap">
+        <div><strong>Copyright &copy; 2023.</strong> All rights reserved.</div>
+    
+        <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+      </footer>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+</html>

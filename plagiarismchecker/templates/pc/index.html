@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plag Checker</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
+  <link href="{% static 'pc/styles.css' %}" rel="stylesheet" type="text/css">
+  <style>
+
+    body{
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+    }
+    nav{
+      background-color:rgb(255, 255, 255);
+
+    }
+    #header{
+      background-color: black;
+      color: white;
+      border-bottom: 50px;
+      padding: 5% 0;
+    }
+    #myTab{
+      font-size: 20px;
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    p.bg {
+	font-size: 66px;
+	line-height: 80px;
+	font-weight: 800;
+	text-transform: uppercase;
+	background: url(../static/pc/welcome.jpg) 0 0 / cover no-repeat;
+	color: #de466c;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+ }
+ 
+    </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <a class="navbar-brand" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:#000000; font-size: 40px; font-weight: bolder;" href="{% url 'plagiarism-check-mainpage' %}"> 
+      <!-- {% load static %} <img height="50px" width="50px" src="{% static "pc/product-hunt-brands.svg" %}" alt="logo" /> -->
+      <i class="bi bi-clipboard-check-fill"></i> Plag Checker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav" style="margin-left: auto; ">
+        <li class="nav-item nav-one">
+          <a type="button" style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link btn btn-info" href="{% url 'compare' %}">Compare Documents</a>
+        
+        </li>
+        
+     </ul>
+    </div>
+  </nav>
+   <div id="header">
+    <div class="content-fluid justify-content-between">
+			<p class="bg"
+				style="text-align: center; font-weight: bolder;font-size:10cqb ; font-family: Trirong, serif; margin: 5% auto;">Welcome To Plag Checker
+	    </p>
+		<hr>
+</div>
+    <!-- <p>
+    {% load static %} <img src="{% static "pc/logo.JPG" %}" alt="logo" />
+  </p> -->
+    <!-- <h1 style="font-weight: bolder; font-family: Arial Black; font-size:6ch; padding: 50px;">Welcome To <span style="color:#6c56e6;">Plag Checker</span></h1> -->
+<div  class="container" style="background-image: url(../static/pc/copy.JPG); background-color: rgb(31, 30, 30); background-repeat: no-repeat; background-position: top right; background-size: contain;">
+  
+  <h2 style="box-shadow: black;font-family: Arial black, Helvetica, sans-serif; font-weight: bolder; font-size:30px;"><span style="color:#00bbff">Plag Checker </span>Features..</h2>
+				<hr>
+			<h5 style=" padding: 10px 5px;">
+				<ul class="bg li" style="list-style-type: none;font-size: larger;">
+				<li><i class="bi bi-cursor-fill"></i> Simple and Free Plagiarism Detection Tool</li> 	
+				<li><i class="bi bi-cursor-fill"></i> AI powered Plagiarism Detection Mechanism</li>
+				<li><i class="bi bi-cursor-fill"></i> Fast and Accurate report generator</li>
+			    </ul>
+			</h5>
+</div>
+    
+			<hr>
+    <h3 class="container">To use this plagiarism checker, please copy and paste your text in the box below, then click on the “Check Plagiarism” button, sit back and watch as your article undergoes a free plagiarism scan.
+    </h3>
+    <hr>
+   
+   </div> 
+   <hr>
+   <div class="content-1 container" style="margin: 10px auto;">
+    <div class="col-md-6 offset-3 text-content">
+      
+      <h3>Choose a file or copy-paste text to find plagiarism percentage!</h3>
+      <div class="tab-content-1">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="text-tab" data-toggle="tab" href="#text-input-ws" role="tab"
+              aria-controls="text-input-ws" aria-selected="true" onclick="makeInvisible()">Text</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="file-tab" data-toggle="tab" href="#file-input-ws" role="tab"
+              aria-controls="file-input-ws" aria-selected="false" style="color:#6c56e6;" onclick="makeVisible()">File Upload</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">          
+            <form id="form1-ws" action="/test/" method="POST">
+              {% csrf_token %}               
+              <textarea id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
+                </form>
+          </div>        
+          <div class="tab-pane fade" id="file-input-ws" role="tabpanel" aria-labelledby="file-tab">
+            <form id="form2-ws" action="/filetest/" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <input id="id_docfile" required type="file" name="docfile" />
+              </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+      <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6; font-weight: bold;"><h6>Check Plagiarism</h6></button>
+      <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6; font-weight: bold;"><h6>Check Plagiarism</h6></button>  
+      </div>  
+    </div>
+    <div class="container-fluid result-div">
+      <div class="row">
+        <div style="background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif;" class="col-md-6 result-1">
+          <h2 style="font-weight: bolder;">Plagiarized Content From:</h2>
+          <ul class="output-list-1">
+            {% for links in link %}            
+              <li>{{ links }}</li>
+            {% endfor %}
+      </div>
+      <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
+        <p class="output-per-tot">{{ percent }}%</p>
+        <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized</h3>
+      </div>
+      </div>
+    </div>
+  </div>
+    <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;" class="container-fluid d-flex justify-content-between flex-wrap">
+      <div><strong>Copyright &copy; 2023.</strong> All rights reserved.</div>
+  
+      <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+    </footer>
+  
+
+  <script>
+    function makeVisible() {
+      document.getElementById("submit-button-2").style.visibility = "visible";
+      document.getElementById("submit-button-1").style.visibility = "hidden";
+    }
+
+    function makeInvisible(){
+      document.getElementById("submit-button-2").style.visibility = "hidden";
+      document.getElementById("submit-button-1").style.visibility = "visible";
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+</body>
+
+</html>
