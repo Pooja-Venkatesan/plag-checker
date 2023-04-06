@@ -86,10 +86,7 @@
 	    </p>
 		<hr>
 </div>
-    <!-- <p>
-    {% load static %} <img src="{% static "pc/logo.JPG" %}" alt="logo" />
-  </p> -->
-    <!-- <h1 style="font-weight: bolder; font-family: Arial Black; font-size:6ch; padding: 50px;">Welcome To <span style="color:#6c56e6;">Plag Checker</span></h1> -->
+
 <div  class="container" style="background-image: url(../static/pc/copy.JPG); background-color: rgb(31, 30, 30); background-repeat: no-repeat; background-position: top right; background-size: contain;">
   
   <h2 style="box-shadow: black;font-family: Arial black, Helvetica, sans-serif; font-weight: bolder; font-size:30px;"><span style="color:#00bbff">Plag Checker </span>Features..</h2>
@@ -113,7 +110,7 @@
    <div class="content-1 container" style="margin: 10px auto;">
     <div class="col-md-6 offset-3 text-content">
       
-      <h3>Choose a file or copy-paste text to find plagiarism percentage!</h3>
+      <h3 class="container-fluid" style="font-weight: bolder;">Choose a file or copy-paste text to find plagiarism percentage!</h3>
       <div class="tab-content-1">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -149,14 +146,15 @@
       <div class="row">
         <div style="background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif;" class="col-md-6 result-1">
           <h2 style="font-weight: bolder;">Plagiarized Content From:</h2>
-          <ul class="output-list-1">
+          <hr>
+          <ul class="output-list-1" style="list-style:square; text-align: justify;">
             {% for links in link %}            
-              <li>{{ links }}</li>
+              <li><a href="{{ links }}" style="text-decoration:underline; color: #6c56e6;">{{ links }}</a></li>
             {% endfor %}
       </div>
       <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
         <p class="output-per-tot">{{ percent }}%</p>
-        <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized</h3>
+        <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
       </div>
       </div>
     </div>
@@ -166,9 +164,7 @@
   
       <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
     </footer>
-  
-
-  <script>
+    <script>
     function makeVisible() {
       document.getElementById("submit-button-2").style.visibility = "visible";
       document.getElementById("submit-button-1").style.visibility = "hidden";

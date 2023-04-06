@@ -34,6 +34,11 @@
       font-weight: 400;
       text-decoration: none;
     }
+    label{
+        font-weight: bold;
+        float: left;
+        margin: 10px;
+    }
     
 
 </style>
@@ -72,10 +77,13 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="text-input-dc-1" role="tabpanel"
                             aria-labelledby="text-tab-2">
+                            
                             <form id="form1-ws" action="/twofiletest1/" method="POST">
                                 {% csrf_token %}
-                                <textarea id="text-in-1" name="q1" required></textarea><br>
-                                <textarea id="text-1" name="q2" required></textarea>
+                         
+                                <textarea id="text-in-1" name="q1" placeholder="Copy Paste the Source Text here..." required></textarea><br>
+                          
+                                <textarea id="text-1" name="q2" placeholder="Copy Paste the Suspicious Text here to check plagiarism ..." required></textarea>
                             </form>
                         </div>
                     </div>
@@ -91,9 +99,13 @@
                         <div class="tab-pane fade show active" id="file-input-dc-2" role="tabpanel" aria-labelledby="file-tab-3">
                             <form id="form2-ws" action="/twofilecompare1/" enctype="multipart/form-data" method="POST">
                                 {% csrf_token %}
+                                <label>Upload Source File:</label>
                                 <input type="file" class="fileupload" id="fileupload" name="docfile1" required="True">
+                                <label>Upload Suspicious File:</label>
                                 <input type="file" class="fileupload" id="fileupload" name="docfile2" required="True">
                             </form>
+                            <br><hr>
+                            <h6 style="font-weight: bold;">Note: Compare files of same type (doc or txt)</h6>
                         </div>
                     </div>
                 </div>
@@ -104,9 +116,8 @@
                 <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6;">Compare The Files</button>
             </div>
             <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
-            <ul style="text-align: center;margin-left: 450px;">
-                <li class="output-per" style="list-style:none">{{ result }}%</li>
-                
+            <ul style="text-align: center;margin-left: 450px;list-style: none;">
+                <li class="output-per" style="font-size: 35px; color: #9584f6; padding-top: 43px;margin-top: 5px; text-align: center; width: 155px; height: 155px;border: 7px solid #4431ad;border-radius: 50%">{{ result }}%</li>
             </ul>
 
         </div>

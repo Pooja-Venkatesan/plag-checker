@@ -68,6 +68,7 @@ def findFileSimilarity(inputQuery, database):
 		dotProduct / (queryVectorMagnitude * databaseVectorMagnitude))*100
 	
 	matchPercentage = round(matchPercentage, 2)
+
 # 	print (universalSetOfUniqueWords)
 # 	print()
 # 	print (databaseWordList)
