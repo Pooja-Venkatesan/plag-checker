@@ -1,0 +1,169 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        .footer {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .top-container {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header {
+            padding: 10px 16px;
+            color: #f1f1f1;
+            background-color: brown;
+        }
+        
+        .content {
+            padding: 16px;
+        }
+        
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        
+        .sticky+.content {
+            padding-top: 102px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        
+        th,
+        td {
+            text-align: center;
+            padding: 16px;
+        }
+        
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        
+        .fa-check {
+            color: green;
+        }
+        
+        .fa-remove {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" id="myHeader">
+        <h2>PLAGIARISM REPORT</h2>
+    </div>
+
+    <div class="content">
+        <div>
+            <h6>Your Document Information </h6>
+            
+        </div>
+        
+            <!-- {% for key, values in tracker.items %}
+            <tr>
+                <td style="width:75%">
+                    <p><b><i>{{key}}</i></b></p>
+                    <p>{{values.title}}</p>
+                    <a class="text-weight-bold text-primary" href="{{values.link}}">{{values.link}}</a>
+                    <p>{{values.author}} {{values.cdate}} {{values.creator}} {{values.producer}}</P>
+                    <p><i class="fas fa-copy"></i>{{values.}}</p>
+
+                </td>
+                <td style="width:25%"><i style="color:red">{{values.plagp}}%</i></td>
+
+            </tr>
+
+            {%endfor%} -->
+<!-- ////////////////// -->
+
+<div class="container" style="margin: 0 auto; text-align: center;"> 
+      <h3 style="color: #000000;">YOUR INPUT</h3>
+      <hr>
+      <h5 style="border: #606060;"> {{ text }}</h5> 
+     
+      <table>
+              <tr>
+              <th>Similar Text</th>
+              <th>Soruce Links</th>
+              <th>Percentage</th>
+            </tr>
+            {% for key, value in tracker.items %} 
+            <tr>
+             <td style="color: red;">{{key}}</td>
+             {% endfor %}
+             <td>
+              {% for keys,values in link.items %}  
+                <ul class="output-list-1" style="list-style:square; text-align: justify;">          
+                  <li><a href="{{ keys }}" style="text-decoration:underline; color: #2549ff;">{{ keys }}</a></li>
+                </ul>
+              {% endfor %}
+                </td>
+                <td>
+                  {% for keys,values in link.items %}
+                <ul class="output-list-1" style="list-style:square; text-align: justify;">
+                             
+                    <li style="text-decoration:underline; color: #2549ff;">{{ values }}</li>
+                  {% endfor %}
+                </ul>
+                </td>
+             </tr>                   
+        
+    </table>
+
+    <br>
+
+  </div>
+
+    </div>
+
+
+    <script>
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+</body>
+<div class="footer">
+    <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+</div>
+
+</html>

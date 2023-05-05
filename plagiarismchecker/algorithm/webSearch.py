@@ -1,12 +1,17 @@
 from plagiarismchecker.algorithm import ConsineSim
-from apiclient.discovery import build
+from googleapiclient.discovery import build
 
-# searchEngine_API = 'AIzaSyAoEYif8sqEYvj1P6vYLw6CGMrQbDMmaq8'
+
+searchEngine_API = 'AIzaSyB-htAtka2OIP-F0NSL7EaCaeRjMH1bhRA'
+# searchEngine_API = 'AIzaSyAoEYif8sqEYvj1P6vYLw6CGMrQbDMmaq8' 
 # searchEngine_API = 'AIzaSyCUYy9AtdMUddiNA0gOcsGPQcE372ytyCw'
 # searchEngine_API = 'AIzaSyAQYLRBBeDQNxADPQtUnApntz78-urWEZI'
-searchEngine_API = 'AIzaSyCAeR7_6TTKzoJmSwmOuHZvKcVg_lhqvCc'
+# searchEngine_API = 'AIzaSyCAeR7_6TTKzoJmSwmOuHZvKcVg_lhqvCc'
+# searchEngine_API = 'AIzaSyB-htAtka2OIP-F0NSL7EaCaeRjMH1bhRA'
+# searchEngine_Id = '671ed2d46502e4ed2'
 searchEngine_Id = '758ad3e78879f0e08'
 
+text = str
 def searchWeb(text, output, c):
     text = text
     # print(text)
@@ -39,12 +44,12 @@ def searchWeb(text, output, c):
                                 (output[itemLink]-1) + maxSim)/(output[itemLink]))
             else:
                 print('else', maxSim)
-                print(text)
-                print(itemLink)
+                print("\n TEXT:", text)
+                print("\n ITEM Link:",itemLink)
                 output[itemLink] = 1
                 c[itemLink] = maxSim
     except Exception as e:
-        print(text)
+        print("TEXT:\t",text)
         print(e)
         print('error')
         return output, c, 1

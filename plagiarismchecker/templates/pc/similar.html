@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <style>
+        .footer {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .top-container {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header {
+            padding: 10px 16px;
+            color: #f1f1f1;
+            background-color: brown;
+        }
+        
+        .content {
+            padding: 16px;
+        }
+        
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        
+        .sticky+.content {
+            padding-top: 102px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        
+        th,
+        td {
+            text-align: center;
+            padding: 16px;
+        }
+        
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        
+        .fa-check {
+            color: green;
+        }
+        
+        .fa-remove {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" id="myHeader">
+        <h2 style="margin:auto;  text-align:center;">Similarity Report from the Uploaded Documents</h2>
+    </div>
+
+    <div class="content">
+        <table>
+            <tr>
+                <th style="width:10% !important;">SN</th>
+                <th style="width:30% !important">File 1</th>
+                <th style="width:30% !important">File 2</th>
+                <th style="width:30% !important">Percentage of Similarity</th>
+            </tr>
+            {% for key, values in result.items %}
+            <tr>
+                <td style="width:10% !important">
+                    <p>{{key}}</p>
+                </td>
+                {% csrf_token %} {% for v in values %} {% autoescape off %}
+                <td style="width:25% !important">{{v}}</td>
+                {% endautoescape %} {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+
+    <script>
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+</body>
+<div class="footer">
+    <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+</div>
+
+</html>

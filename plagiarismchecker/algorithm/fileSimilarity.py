@@ -2,7 +2,6 @@ import re
 import math
 from nltk.corpus import stopwords
 
-
 def findFileSimilarity(inputQuery, database):
 
 	universalSetOfUniqueWords = []
@@ -72,8 +71,6 @@ def findFileSimilarity(inputQuery, database):
 # 	print (universalSetOfUniqueWords)
 # 	print()
 # 	print (databaseWordList)
-
-
 # 	print (queryTF)
 # 	print (databaseTF)
 

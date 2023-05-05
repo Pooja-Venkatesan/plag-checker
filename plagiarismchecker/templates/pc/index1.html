@@ -77,12 +77,10 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-  background-color: #d6ceff;
-  color: rgb(0, 0, 0);
-  font-family: arial black;
+  background-color: #baacff;
+  color: white;
 }
  
-
     </style>
 
 </head>
@@ -152,201 +150,150 @@ th {
           <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">          
             <form id="form1-ws" action="/test/#taru" method="POST">
               {% csrf_token %}               
-              <textarea style='padding:auto;' onkeyup="word_checker(this)" maxlength="" id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
+              <textarea style='padding:auto;' oninput="word_checker()" maxlength="" id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
               <p id="ch">1500 Words Remaining </p>
-              <br>
+              <hr>
                 <!-- button input text check plagiarism -->
-             
-                <button type="submit" oninput="reportbtn()" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 0 auto;" name="check-plag">
-                Check Plagiarism
-              </button>
-             
+                <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 0 auto;">
+                  Check Plagiarism
+                </button>
                 </form>
+
+                
               <!-- text input report -->
 
-                <!-- <form method="POST" action="{% url 'report' %}">
+                <form method="POST" action="{% url 'report' %}">
                   {% csrf_token %}
                   <input type="hidden" name="next" value="{% url 'report' %}">
-                  <button type="submit" id="report" class="btn hidden" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto;" name="report-gen" href=" {% url 'report' %} ">Plagiarism Report</button>
-                </form>  -->
+                  <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto;">Plagiarism Report</button>
+                </form> 
             
               <!-- ...... -->
           </div>        
           <div class="tab-pane fade" id="file-input-ws" role="tabpanel" aria-labelledby="file-tab">
-            <form id="form2-ws" action="/filetest/#taru" enctype="multipart/form-data" method="POST" name="frmFile">
+            <form id="form2-ws" action="/filetest/#taru" enctype="multipart/form-data" method="POST">
               <p id="file-result"></p>
             {% csrf_token %}
-            <!-- <input id="id_docfile" required type="file" name="docfile" accept=".doc, .docx, .pdf, .txt"/> -->
-            <div><input type="file" name="docfile" id="docfile" onsubmit="return validate()" required class="demoInputBox" accept=".doc, .docx, .pdf, .txt"/> 
-              <div id="file_error"></div>
-            </div>
-                   
+            <input id="id_docfile" required type="file" name="docfile" accept=".doc, .docx, .pdf, .txt"/>
+            <hr>
              <!-- button input text check plagiarism -->
           
              <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6; font-weight: bold; margin: 0 auto;">
               Check Plagiarism
             </button>  
-          </form>         
-          </div>
+          </form>
+            <!-- file input report -->
 
+            <!-- <form method="POST" action="{% url 'report' %}">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{% url 'report' %}">
+              <button type="submit" form="form2-ws" id="submit-button-2" class="btn" style="background-color:#56b4e6; font-weight: bold; margin: 0 auto;">Plagiarism Report</button>
+            </form> -->
+             
+            
+          <!-- ...... -->
+
+          </div>
+          <form method="POST" action="{% url 'report' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{% url 'report' %}">
+            <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto;">Plagiarism Report</button>
+          </form>
+
+<!-- <form method="POST" action="{% url 'report' %}">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{% url 'report' %}">
+              <button type="submit" form="form2-ws" id="submit-button-2" class="btn" style="background-color:#56b4e6; font-weight: bold; margin: 0 auto;">Plagiarism Report</button>
+            </form> -->
 
         </div>
       </div>
+      <!-- <div class="col-md-9">
+      
+      <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6; font-weight: bold;">
+        <h6>Check Plagiarism</h6>
+      </button>
+ 
+
+      <form method="POST" action="{% url 'report' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'report' %}">
+        <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#56b4e6; font-weight: bold;">Plagiarism Report</button>
+      </form>
+
+      <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6; font-weight: bold;">
+        <h6>Check Plagiarism</h6>
+      </button>  
+
+
+      <form method="POST" action="{% url 'report' %}">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{% url 'report' %}">
+        <button type="submit" form="form2-ws" id="submit-button-2" class="btn" style="background-color:#56b4e6; font-weight: bold;">Plagiarism Report</button>
+      </form>
+
+      </div>   -->
     </div>
-    <br id="taru">
-    <div class="container result-div" style="margin-top: 100px;"> 
+    <br>
+    <div class="container-fluid result-div" style="margin:100px 0;">
       <div class="row">
-        <div style="overflow: visible; background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; margin: 0 auto;" class="col-md-6 result-1">
-          <h2 style="font-weight: bolder; background-color: #f9f7ff; font-family: Arial, Helvetica, sans-serif; ">PLAGIARIZED CONTENT FROM:</h2>
+        <div style="background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; margin: 0 auto;" class="col-md-6 result-1">
+          <h2 style="font-weight: bolder;">Plagiarized Content From:</h2>
           <hr>
-          {% if links %}
-              {% for link in links %} 
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
+          <ul class="output-list-1" style="list-style:square; text-align: justify;">
+            {% for links in link %}            
+              <li><a href="{{ links }}" style="text-decoration:underline; color: #6c56e6;">{{ links }}</a></li>
               {% endfor %}
-              {% else %}
-              <br>
-              <h4 style="font-weight: bold; margin: 0 auto;">NO MATCH FOUND</h4>
-              {% endif %}
-          <!-- <ul class="output-list-1" style="list-style:square; text-align: justify;max-width:min-content; padding: 20px;">
-            {% for link in links %}            
-              <li><a href="{{ links }}" target="_blank" style="text-decoration:underline; color: #6c56e6;">{{ link }}</a></li>
-              {% endfor %} -->
               <hr>
               <!-- <h5>{{ text }}</h5>     -->
       </div>
       <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
-        <p class="output-per-tot">{{ totalPercent }}%</p>
+        <p id="taru" class="output-per-tot">{{ totalPercent }}%</p>
         <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
-        <p class="output-per-tot">{{ uniquePercent }}%</p>
+        <p id="taru" class="output-per-tot">{{ uniquePercent }}%</p>
         <h3 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h3>
         <!-- <ul class="output-list-1" style="list-style:square; text-align: justify;">
         <li> {{ text }}</li>    -->
         
-      </div>    
       </div>
-      </div>
-
-      <!-- action="{% url 'report' %}" -->
-         
-      <form method="POST" action="{% url 'report' %}" >
-        {% csrf_token %}
-        <input type="hidden" name="next" form="form2-ws" value="{% url 'report' %}">
-        <button type="submit" id="report" class="btn hidden" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex;
-        justify-content: center;
-        align-items: center;" name="q" ><a style="text-decoration: none; color: white;" >View Plagiarism Report</a></button>
-      </form> 
+      <hr>
       <br>
-      <div class="container" id="view" style="margin: 0 auto; text-align: center;"> 
+      <div class="container" style="margin: 50px 20px; text-align: center;"> 
        
-      <h2 style="background-color: #6c56e6; text-align: center; color: #ffffff; margin-top: 100px;">PLAGIARISM ANALYSIS REPORT</h2>
-        <h4 style="color: #000000; text-align: left;">CONTENT CHECKED FOR PLAGIARISM:</h4>
+      <h2 style="background-color: #6c56e6; color: #ffffff; margin: 10px ;">PLAGIARISM REPORT</h2>
+        <h3 style="color: #000000;">YOUR INPUT</h3>
         <hr>
-        <h5 style="border: #606060; text-align: justify;"> {{ text }}</h5> 
+        <h5 style="border: #606060;"> {{ text }}</h5> 
        
         <table>
-          <tr style="text-align: justify;color: #000;">
-            <th>CONTENT CHECKED FOR PLAGIARISM</th>
-            <th>MATCHED SOURCES</th>
-            <th>MATCHED SCORE</th>
-          </tr>
-           
-          <tr style="text-align: justify;">
-            
-            <td style="color: red; text-decoration: underline;">
-              {% for key, value in tracker.items %}
-              <ul class="output-list-1" style="list-style:square; text-align: justify;">
-               <li>{{ key }}</li>
-              </ul>
-              {% endfor %}
-              
-            </td>
-            <td style="width:20px;">
-              {% if links %}
-              {% for link in links %} 
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
-              {% endfor %}
-              {% else %}
-              <h6>NO MATCH FOUND</h6>
-              {% endif %}
-            </td>
-            <td style="height:30px; margin: 20px 0 ">
-            {% if scores %}
-                <ul class="output-list-1" style="list-style:none; text-align: justify;">
-                {% for score in scores %}
-                  <li style="color: #aa1b1b;">{{ score }}</li>
-                {% endfor %}
-                </ul>
-            {% else %}
-              <h6>0</h6>
-            {% endif %}
-            </td>
-            
-            
-          </tr> 
-         
-        </table>
-
-        <!-- <table>
-          <tr style="text-align: justify;color: #000;">
-            <th>SIMILAR CONTENT</th>
-            <th>MATCHED SOURCES</th>
-            <th>MATCHED SCORE</th>
-          </tr>
-          <tr style="text-align: justify;">
-          {% for key, value in tracker.items %} 
-            <td style="color: red; text-decoration: underline;">{{key}}</td>
-            <td>
-              {% for link in links %} 
-              
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
-              
-              
-              {% endfor %}
-               </td>
-               <td>
-                {% for score in scores %}
-              <ul class="output-list-1" style="list-style:none; text-align: justify;">
-                           
-                  <li style="color: #aa1b1b;">{{ score}}</li>
-                </ul>
-              {% endfor %}
-            
-              </td>
-          </tr> 
-          {% endfor %}
-        </table> -->
-
-
-
-   
-             <hr>
-             <table style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
-               <tr style="border-collapse: #000;">
-                               
-                  <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; color: #000000;">
-                    <h5 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h5>
-                  </th>
-                  <td style="color: #000000;">
-                    <p class="output-per-tot">{{ uniquePercent }}%</p>
-                  </td>
-
-                  <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; width: fit-content;color: #000000;">
-                    <h5>Plagiarized Content:</h5>
-                  </th>
-                  <td style="color: #000000;">
-                    <p class="output-per-tot">{{ totalPercent }}%</p>
-                  </td>
-               </tr>
-              
-      </table>
-
       
+             
+              <tr>
+                <th>Similar Text</th>
+                <th>Soruce Links</th>
+              </tr>
+              {% for key, value in tracker.items %}  
+              <tr>
+               <td style="color: red;">{{key}}</td>
+               <td>
+                  <ul class="output-list-1" style="list-style:square; text-align: justify;">
+                  {% for links in link.items %}            
+                    <li><a href="{{ links }}" style="text-decoration:underline; color: #2549ff;">{{ links }}</a></li>
+                    {% endfor %}
+                    </ul>
+                  </td>
+               </tr>                   
+          {% endfor %}
+          
+      </table>
+      <h2>Total Suspected Plagiarism Score from the document</h2>
+            <h3 style="width:20%"><i style="color:red">{{totalPercent}}%</i></h3>
+              
+          <h2>Unique Score from the document</h2>
+            <h3 style="width:20%"><i style="color:rgb(11, 173, 87)">{{uniquePercent}}%</i></h3>
+     
+      </div>
+      </div>
     </div>
   </div>
     <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;" class="container-fluid d-flex justify-content-between flex-wrap">
@@ -367,21 +314,12 @@ th {
       document.getElementById("submit-button-1").style.visibility = "visible";
     }
 
-    function reportbtn(){
-      // document.getElementsById("report").style.visibility = 'visible';
-      document.getElementById("report").classList.remove("hidden")
-    }
-
-
-    function word_checker(self){
+    function word_checker(){
       elem = document.getElementById("text-1");
       var word = elem.value;
       // number of words in the text
-      var spaces = self.value.match(/\S+/g);
-      var num_words = spaces ? spaces.length : 0;
-      // var num_words = word.split(/\s+/).length;
-      // lenght_of_word = word.length;
-  
+      var num_words = word.split(/\s+/).length;
+      lenght_of_word = word.length;
       if(num_words > 1500){
         alert("You have exceeded the word limit. Please enter a text less than 1500 words.");
         elem.value = "";
@@ -390,22 +328,21 @@ th {
         document.getElementById("ch").innerHTML = 1500 - num_words + " Words Remaining";
       }
     }
-    // file-size limit
-    function validate() {
-      document.getElementById("file_error").innerHTML = "";
-      document.querySelector(".demoInputBox").style.borderColor = "#F0F0F0";
-      var fileInput = document.getElementById("docfile");
-      var file_size = fileInput.files[0].size;
-      if (file_size > 2097152) {
-        document.getElementById("file_error").innerHTML = "File size is greater than 2MB";
-        document.querySelector(".demoInputBox").style.borderColor = "#FF0000";
-        return false;
-       } 
-      return true;
-}
-
+// file-size limit
+// var MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+ 
+//  $(document).ready(function() {
+//      $('#id_docfile').change(function() {
+//          fileSize = this.files[0].size;
+//          if (fileSize > MAX_FILE_SIZE) {
+//              this.setCustomValidity("File must not exceed 5 MB!");
+//              this.reportValidity();
+//          } else {
+//              this.setCustomValidity("");
+//          }
+//      });
+//  });
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <!-- JQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

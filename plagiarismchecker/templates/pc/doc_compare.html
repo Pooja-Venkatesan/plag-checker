@@ -39,7 +39,22 @@
         float: left;
         margin: 10px;
     }
-    
+    .output-per{
+        text-align: center;
+        margin-left: 450px;
+        font-size: 35px;
+    color: #9584f6;
+    padding-top: 43px;
+    margin-top: 5px;
+    text-align: center;
+    width: 155px;
+    height: 155px;
+    border: 7px solid #4431ad;
+    border-radius: 50%
+    }
+    ul{
+        list-style: none;
+    }
 
 </style>
 </head>
@@ -54,7 +69,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav" style="margin-left: auto;">
                 <li class="nav-item nav-one">
-                    <a style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link  btn btn-warning" href="{% url 'plagiarism-check-mainpage' %}">Text Plagiarism  <span
+                    <a style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link  btn btn-warning" href="{% url 'plagiarism-check-mainpage' %}">Check Plagiarism<span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item nav-two">
@@ -116,8 +131,9 @@
                 <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6;">Compare The Files</button>
             </div>
             <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
-            <ul style="text-align: center;margin-left: 450px;list-style: none;">
-                <li class="output-per" style="font-size: 35px; color: #9584f6; padding-top: 43px;margin-top: 5px; text-align: center; width: 155px; height: 155px;border: 7px solid #4431ad;border-radius: 50%">{{ result }}%</li>
+            <ul>
+                <li class="output-per">{{ result }}%</li>
+                
             </ul>
 
         </div>

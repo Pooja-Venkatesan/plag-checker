@@ -1,0 +1,212 @@
+
+<html>
+<head>
+    <title> {{ data.title }}</title>
+    <style>
+        .footer {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            font-size: 20px;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .top-container {
+            background-color: #f1f1f1;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header {
+            padding: 10px;
+            color: #f1f1f1;
+            background-color: brown;
+            text-align: center;
+        }
+        
+        .content {
+            padding: 16px;
+        }
+        
+        .sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        
+        .sticky+.content {
+            padding-top: 102px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        
+        th,
+        td {
+            text-align: center;
+            padding: 16px;
+        }
+        
+        th:first-child,
+        td:first-child {
+            text-align: left;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        
+        .fa-check {
+            color: green;
+        }
+        
+        .fa-remove {
+            color: red;
+        }
+
+        .output-per-tot{
+            font-size: 35px;
+            color: #9584f6;
+            padding-top: 43px;
+            margin-left: 20px;
+            margin-top: 5px;
+            text-align: center;
+            width: 150px;
+            height: 100px;
+            border: 7px solid #4431ad;
+            border-radius: 50%
+}
+
+#p1 {
+    margin-left: 180px;
+}
+
+.result-div{
+    margin-bottom: 40px;
+}
+
+.result-1{
+    background-color: #9987ff;
+    padding: 15px 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.result-2{
+    padding-top: 25px;
+}
+
+
+    </style>
+</head>
+
+<body>
+    <h1> {{data.title }} By Plag Checker</h1>
+    <div class="header" id="myHeader">
+        <h2>PLAGIARISM ANALYSIS REPORT</h2>
+    </div>
+
+    <div class="content">
+        <div>
+            <div class="container" style="margin: 0 auto; text-align: center;"> 
+       
+                <!-- <h2 style="background-color: #6c56e6; text-align: center; color: #ffffff; margin-top: 100px;">PLAGIARISM ANALYSIS REPORT</h2> -->
+                  <h4 style="color: #000000; text-align: left;">CONTENT CHECKED FOR PLAGIARISM:</h4>
+                  <hr>
+        <h5 style="border: #606060; text-align: justify;"> {{ text }}</h5> 
+       
+        <table>
+          <tr style="text-align: justify;color: #000;">
+            <th>SIMILAR CONTENT</th>
+            <th>MATCHED SOURCES</th>
+            <th>Percentage</th>
+          </tr>
+          <tr style="text-align: justify;">
+          {% for key, value in tracker.items %} 
+            <td style="color: red; text-decoration: underline;">{{key}}</td>
+              {% for link in links %} 
+              <td>
+              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
+                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
+              </ul>
+              {% endfor %}
+              </td>
+           
+                  {% for score in scores %} 
+                  <td>
+                    <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
+                        <li style="text-decoration:underline; color: #5874ff;">{{ score }}</li>
+                   
+                    </ul>
+                  </td>
+                  {% endfor %} 
+                 
+          </tr> 
+          {% endfor %}
+        </table>
+
+        <hr>
+             <table style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
+               <tr style="border-collapse: #000;">
+                <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; width: fit-content;color: #000000;">
+                  <h5>Plagiarized Content:</h5>
+                </th>
+                <td style="color: #000000;">
+                  <p class="output-per-tot">{{ totalPercent }}%</p>   </td>
+                
+                  <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; color: #000000;">
+                    <h5 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h5>
+                  </th>
+                  <td style="color: #000000;">
+                    <p class="output-per-tot">{{ uniquePercent }}%</p>
+                  </td>
+               </tr>
+              
+      </table>
+
+  
+                
+              </div>
+            </div>
+              <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px ; text-align: center; " class="container-fluid d-flex justify-content-between flex-wrap">
+                <div><strong>Report Generated By</strong> Plag Checker</div>
+            
+                <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+              </footer>
+            
+        </div>
+        
+    </div>
+
+
+    <script>
+        window.onscroll = function() {
+            myFunction()
+        };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
