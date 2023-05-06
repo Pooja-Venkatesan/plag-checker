@@ -147,52 +147,55 @@ def filetest(request):
     value = '' 
     print("GET QUERY STARTED!!!\n")  
     print("Request:\n", request.FILES['docfile'])
+    if request.method == 'POST':
+        file = request.FILES['docfile']
+        # Check the file size
+        file = request.FILES.get('docfile')
+        if file and file.size > (2 * 1024 * 1024):  # 2MB limit (adjust the limit as needed)
+            print("\n...........ERROR:File size limit exceeded (2MB).....................")
+            return render(request, 'pc/index.html', {'file_size_error': 'File size limit exceeded (2MB). Upload file size less than 2MB to check for plagiarism.'})
 
-    file = request.FILES['docfile']
-    # Check the file size
-    if file.size > (2 * 1024 * 1024):  # 2MB limit (adjust the limit as needed)
-        print("...........ERROR:File size limit exceeded (2MB).....................")
-        return render(request, 'pc/index.html', {'error': 'File size limit exceeded (2MB)'})
-
-    if str(file).endswith(".txt"):
-        value = file.read()
-        print('txt value:', value)
-        value = value.decode('utf-8')
-        print('after decode - txt value:', value)
-    elif str(file).endswith(".docx"):
-        document = Document(file)
-        for para in document.paragraphs:
-            value += para.text
-        print('doc-value:', value)
-        if isinstance(value, bytes):
+        if str(file).endswith(".txt"):
+            value = file.read()
+            print('txt value:', value)
             value = value.decode('utf-8')
-            print('after decode - doc value:', value)
-    elif str(file).endswith(".pdf"):
-        # creating a pdf file object 
-        pdfFileObj = file
+            print('after decode - txt value:', value)
+        elif str(file).endswith(".docx"):
+            document = Document(file)
+            for para in document.paragraphs:
+                value += para.text
+            print('doc-value:', value)
+            if isinstance(value, bytes):
+                value = value.decode('utf-8')
+                print('after decode - doc value:', value)
+        elif str(file).endswith(".pdf"):
+            # creating a pdf file object 
+            pdfFileObj = file
 
-        # creating a pdf reader object 
-        pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+            # creating a pdf reader object 
+            pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
-        # print number of pages in the pdf file
-        print("Number of pages:", pdfReader.getNumPages())
+            # print number of pages in the pdf file
+            print("Number of pages:", pdfReader.getNumPages())
 
-        # creating a page object 
-        pageObj = pdfReader.getPage(0) 
+            # creating a page object 
+            pageObj = pdfReader.getPage(0) 
 
-        # extract text from page
-        value = pageObj.extractText()
-        print('pdf-value:', value)
+            # extract text from page
+            value = pageObj.extractText()
+            print('pdf-value:', value)
 
-        # closing the pdf file object 
-        pdfFileObj.close()
+            # closing the pdf file object 
+            pdfFileObj.close()
 
-    text = value
+        text = value
 
-    # File input word limit set 
-    if len(value.split()) > 1500:
-        print("............ERROR: Word count limit exceeded (1500 words).............")
-        return render(request, 'pc/index.html', {'error': 'Word count limit exceeded (1500 words)'})
+        # Check word count limit
+    
+        word_count = len(text.split())
+        if word_count > 1500:
+            print("\n............ERROR: Word count limit exceeded (1500 words).............")
+            return render(request, 'pc/index.html', {'word_count_error': 'Word count limit exceeded (1500 words). Upload file with less than 1500 words to check for plagiarism.'})
 
     print("\n  TEXT IN FILE INPUT :",text)
     totalPercent, uniquePercent, links, scores, text, tracker= main.findSimilarity(text)

@@ -178,7 +178,20 @@ th {
             {% csrf_token %}
             <!-- <input id="id_docfile" required type="file" name="docfile" accept=".doc, .docx, .pdf, .txt"/> -->
             <div><input type="file" name="docfile" id="docfile" onsubmit="return validate()" required class="demoInputBox" accept=".doc, .docx, .pdf, .txt"/> 
-              <div id="file_error"></div>
+              <div id="file_error">
+                {% if file_size_error %}
+                <script>
+                    alert('{{ file_size_error }}');
+                </script>
+                {% endif %}
+              </div>
+              <div id="word_error">
+                {% if word_count_error %}
+                <script>
+                    alert('{{ word_count_error }}');
+                </script>
+                {% endif %}
+              </div>
             </div>
                    
              <!-- button input text check plagiarism -->
