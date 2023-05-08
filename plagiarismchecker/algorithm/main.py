@@ -7,37 +7,7 @@ from termcolor import colored
 
 # Given a text string, remove all non-alphanumeric
 # characters (using Unicode definition of alphanumeric).
-text = ''
-def getQueries(text, n):
-    sentenceEnders = re.compile("['.,()/!?]")
-    sentenceList = sentenceEnders.split(text)
-    sentencesplits = []
-    en_stops = set(stopwords.words('english'))
 
-    for sentence in sentenceList:
-        x = re.compile(r'\W+', re.UNICODE).split(sentence)
-        for word in x:
-            if word.lower() in en_stops:
-                x.remove(word)
-        x = [ele for ele in x if ele != '']
-        sentencesplits.append(x)
-    finalq = []
-    for sentence in sentencesplits:
-        l = len(sentence)
-        if l > n:
-            l = int(l/n)
-            index = 0
-            for i in range(0, l):
-                finalq.append(sentence[index:index+n])
-                index = index + n-1
-                if index+n > l:
-                    index = l-n-1
-            if index != len(sentence):
-                finalq.append(sentence[len(sentence)-index:len(sentence)])
-        else:
-            if l > 4:
-                finalq.append(sentence)
-    return finalq
 
 
 # def findSimilarity(text):
@@ -89,6 +59,42 @@ def getQueries(text, n):
 #     print(totalPercent, outputLink)
 #     print("\nDone!")
 #     return totalPercent, outputLink, websiteMatches, text
+
+
+
+
+text = ''
+def getQueries(text, n):
+    sentenceEnders = re.compile("['.,()/!?]")
+    sentenceList = sentenceEnders.split(text)
+    sentencesplits = []
+    en_stops = set(stopwords.words('english'))
+
+    for sentence in sentenceList:
+        x = re.compile(r'\W+', re.UNICODE).split(sentence)
+        for word in x:
+            if word.lower() in en_stops:
+                x.remove(word)
+        x = [ele for ele in x if ele != '']
+        sentencesplits.append(x)
+    finalq = []
+    for sentence in sentencesplits:
+        l = len(sentence)
+        if l > n:
+            l = int(l/n)
+            index = 0
+            for i in range(0, l):
+                finalq.append(sentence[index:index+n])
+                index = index + n-1
+                if index+n > l:
+                    index = l-n-1
+            if index != len(sentence):
+                finalq.append(sentence[len(sentence)-index:len(sentence)])
+        else:
+            if l > 4:
+                finalq.append(sentence)
+    return finalq
+
 
 tracker ={}
 totalPercent = 0

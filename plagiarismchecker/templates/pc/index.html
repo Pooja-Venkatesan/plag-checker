@@ -99,6 +99,144 @@
       background-color: #d6ceff;
       color: rgb(0, 0, 0);
       font-family: arial black;
+      text-align: center;
+    }
+    .output-per{
+    font-size: 35px;
+    color: #9584f6;
+    padding-top: 43px;
+    margin-top: 5px;
+    text-align: center;
+    width: 155px;
+    height: 155px;
+    border: 7px solid #4431ad;
+    border-radius: 50%
+    }
+
+    .plag{
+        margin-left: 185px; 
+        font-size: 30px;
+        color: #ff6536;
+        padding-top: 43px;
+        margin-top: 5px;
+        text-align: center;
+        width: 155px;
+        height: 155px;
+        border: 7px solid #4431ad;
+        border-radius: 50%
+    }
+
+    .unique{
+        margin-left: 185px; 
+        font-size: 30px;
+        color: #22e6b8;
+        padding-top: 43px;
+        margin-top: 5px;
+        text-align: center;
+        width: 155px;
+        height: 155px;
+        border: 7px solid #4431ad;
+        border-radius: 50%
+    }
+    ul{
+        list-style: none;
+    }
+      
+       
+    .report-title {
+      text-align: center;
+      background-color: #6c56e6;
+      color: #ffffff;
+      margin: 10px;
+    }
+    
+    .input-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .input-heading {
+      color: #000000;
+    }
+    
+    .input-text {
+      text-align: justify;
+    }
+    
+    .results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 50px;
+      text-align: justify;
+      padding: 16px;
+    }
+    
+    .results-table th {
+      font-weight: bold;
+    }
+    
+    .checked-content {
+      /* color: rgb(239, 107, 107); */
+      font-size:15px;
+      /* text-decoration: underline; */
+      text-align: justify;
+    }
+    
+    .matched-sources {
+      font-size: 35px;
+      text-decoration: underline;
+      color: #5874ff;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+    }
+    
+    .matched-score {
+      font-size: 35px;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+      text-decoration: underline;
+      color: #5874ff;
+    }
+    
+    .plagiarism-summary {
+      border: 1px solid black;
+      text-align: justify;
+      width: 100%;
+      background-color: white;
+    }
+    
+    .summary-heading {
+      font-family: Arial black, Helvetica, sans-serif;
+    }
+    
+    .summary-percent {
+      font-size: 35px;
+      color: #9584f6;
+      padding-top: 43px;
+      margin-left: 175px;
+      margin-top: 5px;
+      text-align: center;
+      width: 155px;
+      height: 125px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
     }
   </style>
 
@@ -288,38 +426,40 @@
     <br>
     <br>
 
-    <div class="container" id="downloadReport" style="margin:o auto;">
-      <h1 class="report-title" style="margin-top: 5px;">PLAGIARISM ANALYSIS REPORT</h1>
+    <div id="downloadReport" style="margin: 0 auto;">
+      <h2 class="container report-title" id="view-score" style="background-color:cornflowerblue; text-align: center; color: white; margin: 0 auto;"> PLAG CHECKER <br>
+        <span style="color:#000000;">PLAGIARISM ANALYSIS REPORT</span></h2>
       <hr>
-      <table class="input-table">
-        <tr>
+      <table class="container input-table">
+        <tr class="checked-content plagiarism-summary">
           <td>
-            <h3 class="input-heading">YOUR INPUT</h3>
+            <h4 class="input-heading " style="font-weight: bold;">YOUR INPUT</h4>
             <hr>
           </td>
         </tr>
-        <tr>
+        <tr class="checked-content plagiarism-summary">
           <td>
             <h5 class="input-text">{{ text }}</h5>
           </td>
         </tr>
       </table>
       <hr>
-      <table class="results-table">
-        <tr>
-          <th>CONTENT CHECKED FOR PLAGIARISM</th>
-          <th>MATCHED SOURCES</th>
-          <th>MATCHED SCORE</th>
+      <table class="container results-table" style="table-layout: fixed ;
+      width: 100% ;">
+        <tr class="checked-content plagiarism-summary">
+          <th style="width: 20%;">CONTENT CHECKED FOR PLAGIARISM</th>
+          <th style="width: 30%">MATCHED SOURCES</th>
+          <th style="width: 20%">MATCHED SCORE</th>
         </tr>
-        <tr>
-          <td class="checked-content">
+        <tr class="checked-content plagiarism-summary">
+          <td class="checked-content" style="list-style:square;">
             {% for key, value in tracker.items %}
             <ul>
               <li>{{ key }}</li>
             </ul>
             {% endfor %}
           </td>
-          <td class="matched-sources">
+          <td class="checked-content plagiarism-summary" style="list-style:square;">
             {% if links %}
             {% for link in links %}
             <ul>
@@ -330,7 +470,7 @@
             <h6>NO MATCH FOUND</h6>
             {% endif %}
           </td>
-          <td class="matched-score">
+          <td class="checked-content plagiarism-summary" style="list-style:square;">
             {% if scores %}
             <ul>
               {% for score in scores %}
@@ -343,14 +483,14 @@
           </td>
         </tr>
       </table>
-        <table class="plagiarism-summary" style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
+        <table class="container plagiarism-summary" style="text-align: justify; width: 100%; background-color: white;">  
           <tr>
                           
-          <th style="font-family: Arial black, Helvetica, sans-serif; padding-right: 0px;">Unique Content</th>
+          <th style="font-family: Arial black, Helvetica, sans-serif; padding-right: 0px; width: 25%;"><h5>Unique Content</h5></th>
              
          
-              <td style="color: #000000;">
-                  <p style="font-size: 25px;
+              <td style="color: #000000;width: 25%;">
+                  <p style="font-size: 25px; margin:0 auto;
                   color: #22e6b8;
                   padding-top: 30px;
                   padding-bottom: 0;
@@ -361,9 +501,10 @@
                   border-radius: 50%">{{ uniquePercent }}%</p>
               </td>
 
-              <th style="font-family: Arial black, Helvetica, sans-serif;  padding-right: 0px">Plagiarized Content</th>
-              <td style="color: #000000;">
-                <p style="font-size: 25px;
+              <th style="font-family: Arial black, Helvetica, sans-serif;  padding-right: 0px ;width:25;">
+                <h5>Plagiarized Content</h5></th>
+              <td style="color: #000000;width: 25%;">
+                <p style="font-size: 25px; margin: 0 auto;
                 color: #ff6536;
                 padding-top: 30px;
                 padding-bottom: 0;

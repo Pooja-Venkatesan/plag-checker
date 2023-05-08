@@ -26,6 +26,13 @@ searchEngine_Id = '671ed2d46502e4ed2'
 # searchEngine_Id = '214819438644f41af'
 # searchEngine_API = 'AIzaSyDgUCSQFmLPF36pv1gImNPxmsibAOZJr94'
 
+# searchEngine_API='AIzaSyACDSfEJfk3Tdsb57_iPVdLKJb07lc5yN4'
+# searchEngine_Id = '671ed2d46502e4ed2'
+
+
+
+# searchEngine_API='AIzaSyAFIMA7CbeBh1neb6QwHcvpVFAIEAvXL_U'
+# searchEngine_Id ='40d57d588efd04b9a'
 
 text = str
 def searchWeb(text, output, c):

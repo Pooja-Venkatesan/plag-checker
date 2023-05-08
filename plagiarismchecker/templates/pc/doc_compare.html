@@ -203,6 +203,11 @@
       font-family: arial black;
     }
 
+    .highlight {
+    background-color: rgb(236, 62, 62);
+    font-weight: bold;
+    }
+
 </style>
 </head>
 
@@ -276,85 +281,84 @@
             <div class="row button-align">
                 <button type="submit" form="form1-ws" on id="submit-button-1" class="btn" style="background-color:#6c56e6;">Compare The Texts</button>
                 <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6;">Compare The Files</button>
-            </div>      
-           
-                
-
+            </div>     
         </div>
         <button type="submit" id="report" class="btn" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex;justify-content: center;align-items: center;" onclick="scrollToSection('#view-score')">VIEW PLAGIARISM REPORT</button>
 
-        <!-- <div class="header" id="myHeader">
-            <h2 style="margin:auto;  text-align:center;">Similarity Report from the Uploaded Documents</h2>
-        </div>
-    
-        <div class="content" id="downloadReport">
-
-            <h2>
-                <center>PLAGIARISM ANALYSIS REPORT</center>
-            </h2>
-              <hr>
-            <table>
-                <tr>
-                    <th style="width:10% !important;">SN</th>
-                    <th style="width:30% !important">File 1</th>
-                    <th style="width:30% !important">File 2</th>
-                    <th style="width:30% !important">Percentage of Similarity</th>
-                </tr>
-                {% for key, values in result.items %}
-                <tr>
-                    <td style="width:10% !important">
-                        <p>{{key}}</p>
-                    </td>
-                    {% csrf_token %} {% for v in values %} {% autoescape off %}
-                    <td style="width:25% !important">{{v}}</td>
-                    {% endautoescape %} {% endfor %}
-                </tr>
-                {% endfor %}
-            </table>
-    
-        </div> -->
-        <hr>
+         <hr>
         <div id="downloadReport" style="margin: 0 auto;">
-            <h1 class="report-title" style="margin-top: 5px;" id="view-score">PLAGIARISM ANALYSIS REPORT</h1>
+            <h2 class="report-title" id="view-score" style="background-color:cornflowerblue; text-align: center;"> PLAG CHECKER <br>
+              <span style="color:#000000;">PLAGIARISM ANALYSIS REPORT</span></h2>
             <hr>
           
-            <table class="plagiarism-summary" style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
+            <table style="text-align: justify; margin: 0 auto;width: 50%; background-color: white;">  
                 <tr style="margin: 0 auto;">                
                
-                    <td style="color: #000000;">
+                    <td style="color: #000000; ">
                         <h4 style="font-family: Arial black, Helvetica, sans-serif; text-align: center;">Unique Content</h4>
-                        <p class="unique">{{ uniquePercent }}%</p>
+                        <p class="unique" style="margin: 0 auto;">{{ uniquePercent }}%</p>
                     </td>
       
                     <td style="color: #000000;">
                         <h4 style="font-family: Arial black, Helvetica, sans-serif; text-align: center;">Plagiarized Content</h4>
-                      <p class="plag">{{ totalPercent }}%</p>
+                      <p class="plag" style="margin: 0 auto;">{{ totalPercent }}%</p>
                     </td>
                     
                 </tr>
                
               </table>
-          </div>
-          <hr>
-            <table class="results-table" style="font-size: 10px;">
-            <tr style="text-align: justify; padding: 5px;">
-                <th>YOUR INPUT 1</th>
-                
-                <th>YOUR INPUT 2</th>
-
-            </tr>
-            <tr class="checked-content plagiarism-summary">
-                <td>
-                    <h5 class="input-text">{{ text1}}</h5>
-                </td>
-                <td>
-                    <h5 class="input-text">{{ text2}}</h5>
-                </td>
-            </tr>
-            </table> 
           
+          <hr>
+      
+            <table class="results-table" style="font-size: 10px;">
+                <tr style="text-align: justify; padding: 5px;" class="checked-content plagiarism-summary">
+                    <th>YOUR INPUT 1 (SOURCE TEXT)</th>
+                </tr>
+                <tr style="text-align: justify; padding: 5px;" class="checked-content plagiarism-summary">
+                    <td>
+                        <h5 class="input-text">
+                            {% for word in wordlist1 %}
+                                {% if word in text1 %}
+                                    {% if word in wordlist2 %}
+                                        <mark style="background-color: #ff8686c3;">{{ word }}</mark>
+                                    {% else %}
+                                        <mark style="background-color: #90ee90;">{{ word }}</mark>
+                                    {% endif %}
+                                {% else %}
+                                    {{ word }}
+                                {% endif %}
+                            {% endfor %}
+                        </h5>
+                    </td>
+                </tr>
+                <tr style="text-align: justify; padding: 5px;" class="checked-content plagiarism-summary">
+                    <th>YOUR INPUT 2 (SUSPICIOUS TEXT)</th>
+                </tr>
+                <tr style="text-align: justify; padding: 5px;" class="checked-content plagiarism-summary">
+                    <td>
+                        <h5 class="input-text">
+                            {% for word in wordlist2 %}
+                                {% if word in text2 %}
+                                    {% if word not in wordlist1 %}
+                                        <mark style="background-color: #90ee90;">{{ word }}</mark>
+                                    {% else %}
+                                        <mark style="background-color: #ff8686c3;">{{ word }}</mark>
+                                    {% endif %}
+                                {% else %}
+                                    {{ word }}
+                                {% endif %}
+                            {% endfor %}
+                        </h5>
+                    </td>
+                </tr>
+            </table>
+            
+            
+            
           </div>
-                
+        </div>
+          </div>
+              
             <br>
             <br>
         

@@ -2,77 +2,62 @@ import re
 import math
 from nltk.corpus import stopwords
 
-def findFileSimilarity(inputQuery, database):
+def calculateTF(wordlist):
+    tf = {}
+    for word in wordlist:
+        tf[word] = tf.get(word, 0) + 1
+    return tf
 
-	universalSetOfUniqueWords = []
-	totalPercent = 0
+def calculateDotProduct(tf1, tf2):
+    dotProduct = 0
+    for word, count1 in tf1.items():
+        if word in tf2:
+            count2 = tf2[word]
+            dotProduct += count1 * count2
+    return dotProduct
 
-	lowercaseQuery = inputQuery.lower()
-	en_stops = set(stopwords.words('english'))
+def calculateMagnitude(tf):
+    magnitude = 0
+    for count in tf.values():
+        magnitude += count ** 2
+    return math.sqrt(magnitude)
 
-	# Replace punctuation by space and split
-	queryWordList = re.sub("[^\w]", " ", lowercaseQuery).split()
-	# queryWordList = map(str, queryWordList)					#This was causing divide by zero error
+def findFileSimilarity(inputText1, inputText2):
+    wordlist1 = []
+    wordlist2 = []
 
-	for word in queryWordList:
-		if word not in universalSetOfUniqueWords:
-			universalSetOfUniqueWords.append(word)
+    lowercaseText1 = inputText1.lower()
+    lowercaseText2 = inputText2.lower()
+    en_stops = set(stopwords.words('english'))
 
-	database1 = database.lower()
+    # Replace punctuation by space and split
+    wordlist1 = re.sub("[^\w]", " ", lowercaseText1).split()
+    wordlist2 = re.sub("[^\w]", " ", lowercaseText2).split()
 
-	# Replace punctuation by space and split
-	databaseWordList = re.sub("[^\w]", " ", database1).split()
-	# databaseWordList = map(str, databaseWordList)			#And this also leads to divide by zero error
+    # Remove stopwords
+    wordlist1 = [word for word in wordlist1 if word not in en_stops]
+    wordlist2 = [word for word in wordlist2 if word not in en_stops]
 
-	for word in databaseWordList:
-		if word not in universalSetOfUniqueWords:
-			universalSetOfUniqueWords.append(word)
+    # Calculate TF for wordlist1 and wordlist2
+    tf1 = calculateTF(wordlist1)
+    tf2 = calculateTF(wordlist2)
 
-	for word in universalSetOfUniqueWords:
-		if word in en_stops:
-			universalSetOfUniqueWords.remove(word)
+    # Calculate dot product
+    dotProduct = calculateDotProduct(tf1, tf2)
 
-	queryTF = []
-	databaseTF = []
+    # Calculate magnitudes
+    magnitude1 = calculateMagnitude(tf1)
+    magnitude2 = calculateMagnitude(tf2)
 
-	for word in universalSetOfUniqueWords:
-		queryTfCounter = 0
-		databaseTfCounter = 0
+    # Calculate total percentage using TF algorithm
+    totalPercent = (dotProduct / (magnitude1 * magnitude2)) * 100
+    totalPercent = round(totalPercent, 2)
+    uniquePercent = 100 - totalPercent
+    uniquePercent = round(uniquePercent,2)
+    print ('wordlist1 :',wordlist1)
+    print()
+    print('\n wordlist2 :',wordlist2)
+    print ('\n input1TF :',tf1)
+    print ('\n input2TF :',tf2)
 
-		for word2 in queryWordList:
-			if word == word2:
-				queryTfCounter += 1
-		queryTF.append(queryTfCounter)
-
-		for word2 in databaseWordList:
-			if word == word2:
-				databaseTfCounter += 1
-		databaseTF.append(databaseTfCounter)
-
-	dotProduct = 0
-	for i in range(len(queryTF)):
-		dotProduct += queryTF[i]*databaseTF[i]
-
-	queryVectorMagnitude = 0
-	for i in range(len(queryTF)):
-		queryVectorMagnitude += queryTF[i]**2
-	queryVectorMagnitude = math.sqrt(queryVectorMagnitude)
-
-	databaseVectorMagnitude = 0
-	for i in range(len(databaseTF)):
-		databaseVectorMagnitude += databaseTF[i]**2
-	databaseVectorMagnitude = math.sqrt(databaseVectorMagnitude)
-
-	totalPercent = (float)(
-		dotProduct / (queryVectorMagnitude * databaseVectorMagnitude))*100
-	
-	totalPercent = round(totalPercent,2)    
-	uniquePercent = 100 - totalPercent
-	uniquePercent = round(uniquePercent,2)
-	print ('universalSetOfUniqueWords: ',universalSetOfUniqueWords)
-	print()
-	print('\ndatabaseWordList: ',databaseWordList)
-	print ('\nqueryTF',queryTF)
-	print ('\ndatabaseTF',databaseTF)
-
-	return totalPercent,uniquePercent
+    return totalPercent, uniquePercent, wordlist1, wordlist2
