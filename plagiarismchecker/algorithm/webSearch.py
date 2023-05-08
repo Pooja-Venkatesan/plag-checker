@@ -2,20 +2,29 @@ from plagiarismchecker.algorithm import ConsineSim
 from googleapiclient.discovery import build
 
 
-# searchEngine_API = 'AIzaSyB-htAtka2OIP-F0NSL7EaCaeRjMH1bhRA'
+
 # searchEngine_API = 'AIzaSyAoEYif8sqEYvj1P6vYLw6CGMrQbDMmaq8' 
-# searchEngine_API = 'AIzaSyCUYy9AtdMUddiNA0gOcsGPQcE372ytyCw'
-# searchEngine_API = 'AIzaSyAQYLRBBeDQNxADPQtUnApntz78-urWEZI'
+searchEngine_API = 'AIzaSyCUYy9AtdMUddiNA0gOcsGPQcE372ytyCw'
+#searchEngine_API = 'AIzaSyAQYLRBBeDQNxADPQtUnApntz78-urWEZI'
 # searchEngine_API = 'AIzaSyCAeR7_6TTKzoJmSwmOuHZvKcVg_lhqvCc'
+
 # searchEngine_API = 'AIzaSyB-htAtka2OIP-F0NSL7EaCaeRjMH1bhRA'
-# searchEngine_Id = '671ed2d46502e4ed2'
-searchEngine_Id = '758ad3e78879f0e08'
+searchEngine_Id = '671ed2d46502e4ed2'
+
+# searchEngine_Id = '758ad3e78879f0e08'
+# searchEngine_API = 'AIzaSyBv8-iI-_O4unTkaskqrhFpvKti14lPTcE'
 
 
-searchEngine_API = 'AIzaSyB-htAtka2OIP-F0NSL7EaCaeRjMH1bhRA'
+# searchEngine_Id = '37cf5730519084601'
+# searchEngine_API = 'AIzaSyAAD_ZcCmIbaSquTQvCZV2nFrlo4mdzByU'
 
-# searchEngine_API = 
-# searchEngine_API =
+
+# 8.5.23 11:30 am
+# searchEngine_Id='11f6ecf16b14b4df1'
+# searchEngine_API='AIzaSyA7ontrSoOWnBd-WAxzrmqmXyhpWqfKi_c'
+
+# searchEngine_Id = '214819438644f41af'
+# searchEngine_API = 'AIzaSyDgUCSQFmLPF36pv1gImNPxmsibAOZJr94'
 
 
 text = str
@@ -27,7 +36,11 @@ def searchWeb(text, output, c):
                          developerKey=searchEngine_API).cse()
         result = resource.list(q=text, cx=searchEngine_Id).execute()
         searchInfo = result['searchInformation']
-        # print(searchInfo)
+
+        print("\n This is the Search Info Result \n")
+        
+        print(result)
+
         if(int(searchInfo['totalResults']) > 0):
             maxSim = 0
             itemLink = ''

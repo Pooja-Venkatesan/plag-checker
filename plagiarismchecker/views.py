@@ -5,10 +5,15 @@ from django.http import HttpResponse
 from plagiarismchecker.algorithm import main
 from plagiarismchecker.algorithm.main import tracker,totalPercent, uniquePercent, outputLink, text
 
+# from reportlab.lib.pagesizes import letter
+# from reportlab.pdfgen import canvas
+
 from docx import *
 from docx import Document
 from plagiarismchecker.algorithm import fileSimilarity
 import PyPDF2 
+# import doc2text as dt
+
 
 # from django.shortcuts import redirect
 # from xhtml2pdf import pisa
@@ -46,18 +51,53 @@ links = []
 scores = [] 
 text = str 
 tracker = {}
+context = {
+    'tracker' : tracker, 'links' : links, 'Scores':scores, 'text':text,'totalPercent':totalPercent, 'uniquePercent':uniquePercent
+}
 
 
-def report(request):
-    if request.POST.get('q'): 
-        totalPercent, uniquePercent, links, scores, text, tracker= main.findSimilarity(request.POST['q'])
-        print("\n List of links:", links, "and Scores", scores )
-        return render(request, 'pc/report.html', {'tracker' : tracker, 'links' : links, 'Scores':scores, 'text':text,'totalPercent':totalPercent, 'uniquePercent':uniquePercent})
-    elif request.FILES.get(['docfile']):
-        totalPercent, uniquePercent, links, scores, text, tracker= main.findSimilarity(value)
-        return render(request, 'pc/index.html',{'links': links, 'totalPercent': totalPercent,'uniquePercent':uniquePercent, 'text' : text,'scores;':scores, 'tracker':tracker})
-    else:
-        return HttpResponse("No content to check for plagiarism.")
+# def download_report(request):
+#     # Get the content checked for plagiarism from the request or any other source
+#     content = request.POST.get('text', 'context')
+
+#     # Create a PDF file
+#     response = HttpResponse(content_type='application/pdf')
+#     response['Content-Disposition'] = 'attachment; filename="plagiarism_report.pdf"'
+
+#     # Create a canvas for the PDF
+#     p = canvas.Canvas(response, pagesize=letter)
+
+#     # Set the font and font size
+#     p.setFont("Helvetica", 12)
+
+#     # Add the content to the PDF with highlighted texts and formatting
+#     p.drawString(100, 700, "CONTENT CHECKED FOR PLAGIARISM:")
+#     p.drawString(100, 680, content)
+
+#     # Save the PDF canvas
+#     p.showPage()
+#     p.save()
+
+#     return response
+
+
+
+
+# def report(request):
+#     if request.POST.get('q'): 
+#         totalPercent, uniquePercent, links, scores, text, tracker= main.findSimilarity(request.POST['q'])
+#         print("\n List of links:", links, "and Scores", scores )
+#         # return render(request, 'pc/report.html', {'tracker' : tracker, 'links' : links, 'Scores':scores, 'text':text,'totalPercent':totalPercent, 'uniquePercent':uniquePercent})
+#         return render(request, 'pc/report.html', context)
+    
+#     elif request.FILES.get(['docfile']):
+#         totalPercent, uniquePercent, links, scores, text, tracker= main.findSimilarity(text)
+        
+#         return render(request, 'pc/report.html',{'links': links, 'totalPercent': totalPercent,'uniquePercent':uniquePercent, 'text' : text,'scores;':scores, 'tracker':tracker})
+    
+#         # return render(request, 'pc/index.html',{'links': links, 'totalPercent': totalPercent,'uniquePercent':uniquePercent, 'text' : text,'scores;':scores, 'tracker':tracker})
+#     else:
+#         return HttpResponse("No content to check for plagiarism.")
 
 
 
@@ -80,7 +120,7 @@ def report(request):
 #web search(Text)
 
 def test(request):
-    # print("request is welcome test")
+    #print("request is welcome test")
 
     print(request.POST['q'])  
     if request.POST['q']: 
@@ -160,14 +200,28 @@ def filetest(request):
             print('txt value:', value)
             value = value.decode('utf-8')
             print('after decode - txt value:', value)
+            
         elif str(file).endswith(".docx"):
             document = Document(file)
             for para in document.paragraphs:
                 value += para.text
+            print('docx-value:', value)
+            if isinstance(value, bytes):
+                value = value.decode('utf-8')
+                print('after decode - docx value:', value)
+
+            """elif str(file).endswith(".doc"):
+            documentdoc = dt.Document(file)
+            for para in documentdoc.paragraphs:
+                value += para.text
             print('doc-value:', value)
             if isinstance(value, bytes):
                 value = value.decode('utf-8')
-                print('after decode - doc value:', value)
+                print('after decode - doc value:', value)"""
+            
+            
+            
+        
         elif str(file).endswith(".pdf"):
             # creating a pdf file object 
             pdfFileObj = file
@@ -206,7 +260,7 @@ def filetest(request):
     print("\n list of links:", links)
     print("\n scores:", scores)
     
-    return render(request, 'pc/index.html',{'links': links, 'totalPercent': totalPercent,'uniquePercent':uniquePercent, 'text' : text,'scores;':scores, 'tracker':tracker})
+    return render(request, 'pc/index.html',{'links': links, 'totalPercent': totalPercent,'uniquePercent':uniquePercent, 'text' : text,'scores':scores, 'tracker':tracker})
 
 
 # def filetest(request):
@@ -238,21 +292,75 @@ def filetest(request):
 
 # .........Extrinsic.................
 #text compare
+# def fileCompare(request):
+#     return render(request, 'pc/doc_compare.html') 
+
+# #two text compare(Text)
+# def twofiletest1(request):
+#     print("Submiited text for 1st and 2nd")
+#     print(request.POST['q1'])
+#     print(request.POST['q2'])
+
+#     if request.POST['q1'] != '' and request.POST['q2'] != '': 
+#         print("Got both the texts")
+#         result = fileSimilarity.findFileSimilarity(request.POST['q1'],request.POST['q2'])
+#     result = round(result,2)    
+#     print("Output>>>!!!!",result)
+#     return render(request, 'pc/doc_compare.html',{'result': result})
+    
+
+# #two text compare(.txt, .docx)
+# def twofilecompare1(request):
+#     value1 = ''
+#     value2 = ''
+#     value3=''
+#     if (str(request.FILES['docfile1'])).endswith(".txt") and (str(request.FILES['docfile2'])).endswith(".txt"):
+#         value1 = str(request.FILES['docfile1'].read())
+#         value2 = str(request.FILES['docfile2'].read())
+
+#     elif (str(request.FILES['docfile1'])).endswith(".docx") and (str(request.FILES['docfile2'])).endswith(".docx"):
+#         document = Document(request.FILES['docfile1'])
+#         for para in document.paragraphs:
+#             value1 += para.text
+#         document = Document(request.FILES['docfile2'])
+#         for para in document.paragraphs:
+#             value2 += para.text
+#     elif (str(request.FILES['docfile1'])).endswith(".doc") and (str(request.FILES['docfile2'])).endswith(".doc"):
+#         document = Document(request.FILES['docfile1'])
+#         for para in document.paragraphs:
+#             value1 += para.text
+#         document = Document(request.FILES['docfile2'])
+#         for para in document.paragraphs:
+#             value3 += para.text
+
+#     result = fileSimilarity.findFileSimilarity(value1,value2,value3)
+    
+#     print("Output! \n",result)
+#     return render(request, 'pc/doc_compare.html',{'result': result})
+# .................
+
+
+
+# .........Extrinsic.................
+#text compare
 def fileCompare(request):
     return render(request, 'pc/doc_compare.html') 
 
 #two text compare(Text)
 def twofiletest1(request):
     print("Submiited text for 1st and 2nd")
-    print(request.POST['q1'])
-    print(request.POST['q2'])
+    q1=request.POST['q1']
+    q2=request.POST['q2']
+    print('text 1 (q1):',q1)
+    print('text 2 (q2)',q2)
 
     if request.POST['q1'] != '' and request.POST['q2'] != '': 
         print("Got both the texts")
-        result = fileSimilarity.findFileSimilarity(request.POST['q1'],request.POST['q2'])
-    result = round(result,2)    
-    print("Output>>>!!!!",result)
-    return render(request, 'pc/doc_compare.html',{'result': result})
+        print("\n now go to fileSimilarity.findFileSimilarity(request.POST['q1'],request.POST['q2'])\n")
+        totalPercent,uniquePercent = fileSimilarity.findFileSimilarity(request.POST['q1'],request.POST['q2'])
+    
+    print("Output>>>!!!! \n plag-percent and unique-percent",totalPercent,uniquePercent)
+    return render(request, 'pc/doc_compare.html',{'text1':q1,'text2':q2,'totalPercent': totalPercent,'uniquePercent':uniquePercent})
     
 
 #two text compare(.txt, .docx)
@@ -262,6 +370,9 @@ def twofilecompare1(request):
     if (str(request.FILES['docfile1'])).endswith(".txt") and (str(request.FILES['docfile2'])).endswith(".txt"):
         value1 = str(request.FILES['docfile1'].read())
         value2 = str(request.FILES['docfile2'].read())
+        print('txt value:', value)
+        value = value.decode('utf-8')
+        print('after decode - txt value:', value)
 
     elif (str(request.FILES['docfile1'])).endswith(".docx") and (str(request.FILES['docfile2'])).endswith(".docx"):
         document = Document(request.FILES['docfile1'])
@@ -276,3 +387,54 @@ def twofilecompare1(request):
     print("Output! \n",result)
     return render(request, 'pc/doc_compare.html',{'result': result})
 # .................
+
+
+# def fileCompare(request):
+#     return render(request, 'pc/doc_compare.html') 
+
+# def twofiletest1(request):
+#     print("Submitted text for 1st and 2nd")
+#     print(request.POST['q1'])
+#     print(request.POST['q2'])
+
+#     if request.POST['q1'] != '' and request.POST['q2'] != '': 
+#         print("Got both the texts")
+#         result = fileSimilarity.findFileSimilarity(request.POST['q1'], request.POST['q2'])
+#         result = round(result, 2)
+#         print("Output>>>!!!!", result)
+#         return render(request, 'pc/doc_compare.html', {'result': result})
+
+# def twofilecompare1(request):
+#     value1 = ''
+#     value2 = ''
+#     value3 = ''
+#     inputQuery = ''
+#     database = ''
+#     matchPercentage = 0
+#     uniquePercentage = 0
+
+
+#     if (str(request.FILES['docfile1'])).endswith(".txt") and (str(request.FILES['docfile2'])).endswith(".txt"):
+#         value1 = str(request.FILES['docfile1'].read())
+#         value2 = str(request.FILES['docfile2'].read())
+
+#     elif (str(request.FILES['docfile1'])).endswith(".docx") and (str(request.FILES['docfile2'])).endswith(".docx"):
+#         document = Document(request.FILES['docfile1'])
+#         for para in document.paragraphs:
+#             value1 += para.text
+#         document = Document(request.FILES['docfile2'])
+#         for para in document.paragraphs:
+#             value2 += para.text
+
+#     elif (str(request.FILES['docfile1'])).endswith(".doc") and (str(request.FILES['docfile2'])).endswith(".doc"):
+#         document = Document(request.FILES['docfile1'])
+#         for para in document.paragraphs:
+#             value1 += para.text
+#         document = Document(request.FILES['docfile2'])
+#         for para in document.paragraphs:
+#             value2 += para.text
+
+#     inputQuery, database = fileSimilarity.findFileSimilarity(inputQuery, database)
+#     print("Output! \n", inputQuery, database)
+#     return render(request, 'pc/doc_compare.html', {'matchPercentage':matchPercentage, 'uniquePercentage': uniquePercentage
+# })

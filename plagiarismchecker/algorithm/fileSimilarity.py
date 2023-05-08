@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 def findFileSimilarity(inputQuery, database):
 
 	universalSetOfUniqueWords = []
-	matchPercentage = 0
+	totalPercent = 0
 
 	lowercaseQuery = inputQuery.lower()
 	en_stops = set(stopwords.words('english'))
@@ -63,15 +63,16 @@ def findFileSimilarity(inputQuery, database):
 		databaseVectorMagnitude += databaseTF[i]**2
 	databaseVectorMagnitude = math.sqrt(databaseVectorMagnitude)
 
-	matchPercentage = (float)(
+	totalPercent = (float)(
 		dotProduct / (queryVectorMagnitude * databaseVectorMagnitude))*100
 	
-	matchPercentage = round(matchPercentage, 2)
+	totalPercent = round(totalPercent,2)    
+	uniquePercent = 100 - totalPercent
+	uniquePercent = round(uniquePercent,2)
+	print ('universalSetOfUniqueWords: ',universalSetOfUniqueWords)
+	print()
+	print('\ndatabaseWordList: ',databaseWordList)
+	print ('\nqueryTF',queryTF)
+	print ('\ndatabaseTF',databaseTF)
 
-# 	print (universalSetOfUniqueWords)
-# 	print()
-# 	print (databaseWordList)
-# 	print (queryTF)
-# 	print (databaseTF)
-
-	return matchPercentage
+	return totalPercent,uniquePercent

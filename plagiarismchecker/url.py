@@ -3,7 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='plagiarism-check-mainpage'),
-    path('report/', views.report, name='report'),
+    # path('download-report/', views.download_report, name='download-report'),
+    # path('report/', views.report, name='report'),
     path('compare/', views.fileCompare, name='compare'),
     path('test/', views.test, name='Test'),
     path('filetest/', views.filetest, name='filetest'),

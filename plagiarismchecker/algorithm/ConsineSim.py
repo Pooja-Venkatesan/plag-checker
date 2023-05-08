@@ -50,8 +50,9 @@ def text_to_vector(text):
 def cosineSim(text1, text2):
     t1 = text1.lower()
     t2 = text2.lower()
-    # print('t1 : ',t1, '\nt2 : ', t2)
+    print('t1 : ',t1, '\nt2 : ', t2)
     vector1 = text_to_vector(t1)
     vector2 = text_to_vector(t2)
     cosine = get_cosine(vector1, vector2)
+    print("cosine\n:", cosine)
     return cosine

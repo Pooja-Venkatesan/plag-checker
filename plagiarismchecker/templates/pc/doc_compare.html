@@ -21,12 +21,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap" rel="stylesheet">
     <link href="{% static 'pc/stylesDocCheck.css' %}" rel="stylesheet" type="text/css">
     <style>
-        body{
+    body{
             background-color: rgb(255, 255, 255);
             color: rgb(0, 0, 0);
           font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+          
         }
-        nav{
+    nav{
           background-color:rgb(255, 255, 255);
         }
         .text-content{
@@ -40,9 +41,7 @@
         margin: 10px;
     }
     .output-per{
-        text-align: center;
-        margin-left: 450px;
-        font-size: 35px;
+    font-size: 35px;
     color: #9584f6;
     padding-top: 43px;
     margin-top: 5px;
@@ -52,8 +51,156 @@
     border: 7px solid #4431ad;
     border-radius: 50%
     }
+
+    .plag{
+        margin-left: 185px; 
+        font-size: 30px;
+        color: #ff6536;
+        padding-top: 43px;
+        margin-top: 5px;
+        text-align: center;
+        width: 155px;
+        height: 155px;
+        border: 7px solid #4431ad;
+        border-radius: 50%
+    }
+
+    .unique{
+        margin-left: 185px; 
+        font-size: 30px;
+        color: #22e6b8;
+        padding-top: 43px;
+        margin-top: 5px;
+        text-align: center;
+        width: 155px;
+        height: 155px;
+        border: 7px solid #4431ad;
+        border-radius: 50%
+    }
     ul{
         list-style: none;
+    }
+      
+       
+    .report-title {
+      text-align: center;
+      background-color: #6c56e6;
+      color: #ffffff;
+      margin: 10px;
+    }
+    
+    .input-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .input-heading {
+      color: #000000;
+    }
+    
+    .input-text {
+      text-align: justify;
+    }
+    
+    .results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 50px;
+      text-align: justify;
+      padding: 16px;
+    }
+    
+    .results-table th {
+      font-weight: bold;
+    }
+    
+    .checked-content {
+      /* color: rgb(239, 107, 107); */
+      font-size:15px;
+      /* text-decoration: underline; */
+      text-align: justify;
+    }
+    
+    .matched-sources {
+      font-size: 35px;
+      text-decoration: underline;
+      color: #5874ff;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+    }
+    
+    .matched-score {
+      font-size: 35px;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+      text-decoration: underline;
+      color: #5874ff;
+    }
+    
+    .plagiarism-summary {
+      border: 1px solid black;
+      text-align: justify;
+      width: 100%;
+      background-color: white;
+    }
+    
+    .summary-heading {
+      font-family: Arial black, Helvetica, sans-serif;
+    }
+    
+    .summary-percent {
+      font-size: 35px;
+      color: #9584f6;
+      padding-top: 43px;
+      margin-left: 175px;
+      margin-top: 5px;
+      text-align: center;
+      width: 155px;
+      height: 125px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 50px;
+    }
+
+
+    th,
+    td {
+      text-align: left;
+      padding: 5px;
+    }
+
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+
+
+    th {
+      background-color: #d6ceff;
+      color: rgb(0, 0, 0);
+      font-family: arial black;
     }
 
 </style>
@@ -120,30 +267,270 @@
                                 <input type="file" class="fileupload" id="fileupload" name="docfile2" required="True">
                             </form>
                             <br><hr>
-                            <h6 style="font-weight: bold;">Note: Compare files of same type (doc or txt)</h6>
+                            <h6 style="font-weight: bold;">Note: Compare files of same type (docx, txt)</h6>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="row button-align">
-                <button type="submit" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6;">Compare The Texts</button>
+                <button type="submit" form="form1-ws" on id="submit-button-1" class="btn" style="background-color:#6c56e6;">Compare The Texts</button>
                 <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6;">Compare The Files</button>
-            </div>
-            <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
-            <ul>
-                <li class="output-per">{{ result }}%</li>
+            </div>      
+           
                 
-            </ul>
 
         </div>
+        <button type="submit" id="report" class="btn" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex;justify-content: center;align-items: center;" onclick="scrollToSection('#view-score')">VIEW PLAGIARISM REPORT</button>
+
+        <!-- <div class="header" id="myHeader">
+            <h2 style="margin:auto;  text-align:center;">Similarity Report from the Uploaded Documents</h2>
+        </div>
+    
+        <div class="content" id="downloadReport">
+
+            <h2>
+                <center>PLAGIARISM ANALYSIS REPORT</center>
+            </h2>
+              <hr>
+            <table>
+                <tr>
+                    <th style="width:10% !important;">SN</th>
+                    <th style="width:30% !important">File 1</th>
+                    <th style="width:30% !important">File 2</th>
+                    <th style="width:30% !important">Percentage of Similarity</th>
+                </tr>
+                {% for key, values in result.items %}
+                <tr>
+                    <td style="width:10% !important">
+                        <p>{{key}}</p>
+                    </td>
+                    {% csrf_token %} {% for v in values %} {% autoescape off %}
+                    <td style="width:25% !important">{{v}}</td>
+                    {% endautoescape %} {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+    
+        </div> -->
+        <hr>
+        <div id="downloadReport" style="margin: 0 auto;">
+            <h1 class="report-title" style="margin-top: 5px;" id="view-score">PLAGIARISM ANALYSIS REPORT</h1>
+            <hr>
+          
+            <table class="plagiarism-summary" style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
+                <tr style="margin: 0 auto;">                
+               
+                    <td style="color: #000000;">
+                        <h4 style="font-family: Arial black, Helvetica, sans-serif; text-align: center;">Unique Content</h4>
+                        <p class="unique">{{ uniquePercent }}%</p>
+                    </td>
+      
+                    <td style="color: #000000;">
+                        <h4 style="font-family: Arial black, Helvetica, sans-serif; text-align: center;">Plagiarized Content</h4>
+                      <p class="plag">{{ totalPercent }}%</p>
+                    </td>
+                    
+                </tr>
+               
+              </table>
+          </div>
+          <hr>
+            <table class="results-table" style="font-size: 10px;">
+            <tr style="text-align: justify; padding: 5px;">
+                <th>YOUR INPUT 1</th>
+                
+                <th>YOUR INPUT 2</th>
+
+            </tr>
+            <tr class="checked-content plagiarism-summary">
+                <td>
+                    <h5 class="input-text">{{ text1}}</h5>
+                </td>
+                <td>
+                    <h5 class="input-text">{{ text2}}</h5>
+                </td>
+            </tr>
+            </table> 
+          
+          </div>
+                
+            <br>
+            <br>
+        
+
+       <button type="submit" class="btn btn-primary downloadButton" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex; margin-bottom: 20px;
+        justify-content: center; align-items: center;" name="download">Download Report</button>
+    
+    
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    
+ 
+            <script>
+                function scrollToSection(sectionId) {
+                    const section = document.querySelector(sectionId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            </script>
+    <!-- <script>
+          var x = document.getElementById("download-Report");
+          x.style.display = "none";
+    
+          var pdffile = "data:text/html," + $('#download-Report').html()
+    
+          
+          $('.downloadButton').on('click', function () {
+            $('<a />').attr({
+              download: 'Plag_report.html',
+              href: pdffile
+            })[0].click()
+          });
+        </script> -->
+
+        
         
     </div>
-    <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;" class="container-fluid d-flex justify-content-between flex-wrap">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <script>
+    
+      $('.downloadButton').on('click', function () {
+        // Target the element containing the report content
+        var element = document.getElementById("downloadReport");
+    
+        // Set the options for the PDF generation
+        var options = {
+          margin: [20, 20, 20, 20],  // Margins (top, left, bottom, right)
+          filename: 'Plag_report.pdf',  // File name
+          image: { type: 'jpeg', quality: 0.98 },  // Image type and quality
+          html2canvas: { scale: 2 },  // Scale factor for better quality
+          jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },  // PDF unit, format, and orientation
+          style: `
+      body {
+      zoom: 40%;
+      background-color: #ffffff;
+      color: #000000;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    
+    .container {
+      margin: 50px auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    
+    .report-title {
+      text-align: center;
+      background-color: #6c56e6;
+      color: #ffffff;
+      margin: 10px;
+    }
+    
+    .input-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .input-heading {
+      color: #000000;
+    }
+    
+    .input-text {
+      text-align: justify;
+    }
+    
+    .results-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 50px;
+      text-align: justify;
+      padding: 16px;
+    }
+    
+    .results-table th {
+      font-weight: bold;
+    }
+    
+    .checked-content {
+      color: red;
+      text-decoration: underline;
+      text-align: justify;
+    }
+    
+    .matched-sources {
+      font-size: 35px;
+      text-decoration: underline;
+      color: #5874ff;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+    }
+    
+    .matched-score {
+      font-size: 35px;
+      padding-top: 43px;
+      margin-left: 20px;
+      margin-top: 5px;
+      text-align: justify;
+      width: 150px;
+      height: 100px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+      list-style: square;
+      text-align: justify;
+      text-decoration: underline;
+      color: #5874ff;
+    }
+    
+    .plagiarism-summary {
+      border: 1px solid black;
+      text-align: justify;
+      width: 100%;
+      background-color: white;
+    }
+    
+    .summary-heading {
+      font-family: Arial black, Helvetica, sans-serif;
+    }
+    
+    .summary-percent {
+      font-size: 35px;
+      color: #9584f6;
+      padding-top: 43px;
+      margin-left: 175px;
+      margin-top: 5px;
+      text-align: center;
+      width: 155px;
+      height: 125px;
+      border: 7px solid #4431ad;
+      border-radius: 50%;
+    } `
+        };
+    
+        // Generate the PDF
+        html2pdf().set(options).from(element).save();
+      });
+    </script> 
+    </div>
+      <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;"
+        class="container-fluid d-flex justify-content-between flex-wrap">
         <div><strong>Copyright &copy; 2023.</strong> All rights reserved.</div>
+    
     
         <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
       </footer>
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->

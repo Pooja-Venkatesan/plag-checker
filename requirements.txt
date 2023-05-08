@@ -31,4 +31,5 @@ wincertstore==0.2
 PyPDF2
 python-docx
 gunicorn
-nltk==3.6.2
+nltk==3.6.
+docx==

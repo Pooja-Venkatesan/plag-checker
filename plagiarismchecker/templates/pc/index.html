@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plag Checker</title>
+
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <!-- Font Awesome -->
@@ -23,73 +25,92 @@
   <link href="{% static 'pc/styles.css' %}" rel="stylesheet" type="text/css">
   <style>
 
-    body{
+    body {
       background-color: #ffffff;
       color: rgb(0, 0, 0);
-      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
 
     }
-    nav{
-      background-color:rgb(255, 255, 255);
+
+
+    nav {
+      background-color: rgb(255, 255, 255);
+
 
     }
-    #header{
+
+
+    #header {
       background-color: black;
       color: white;
       border-bottom: 50px;
       padding: 5% 0;
     }
-    #myTab{
+
+
+    #myTab {
       font-size: 20px;
       font-weight: 400;
       text-decoration: none;
     }
 
+
     p.bg {
-	font-size: 66px;
-	line-height: 80px;
-	font-weight: 800;
-	text-transform: uppercase;
-	background: url(../static/pc/welcome.jpg) 0 0 / cover no-repeat;
-	color: #de466c;
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
- }
+      font-size: 66px;
+      line-height: 80px;
+      font-weight: 800;
+      text-transform: uppercase;
+      background: url(../static/pc/welcome.jpg) 0 0 / cover no-repeat;
+      color: #de466c;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
- #ch{
-  text-align: right;
-  padding-right: 25px;
- }
 
- table {
-  border-collapse: collapse;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 50px;
-}
+    #ch {
+      text-align: right;
+      padding-right: 25px;
+    }
 
-th, td {
-  text-align: left;
-  padding: 5px;
-}
 
-tr:nth-child(even){background-color: #f2f2f2}
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 50px;
+    }
 
-th {
-  background-color: #d6ceff;
-  color: rgb(0, 0, 0);
-  font-family: arial black;
-}
- 
 
-    </style>
+    th,
+    td {
+      text-align: left;
+      padding: 5px;
+    }
+
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2
+    }
+
+
+    th {
+      background-color: #d6ceff;
+      color: rgb(0, 0, 0);
+      font-family: arial black;
+    }
+  </style>
+
 
 </head>
 
+
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-    <a class="navbar-brand" style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:#000000; font-size: 40px; font-weight: bolder;" href="{% url 'plagiarism-check-mainpage' %}"> 
+    <a class="navbar-brand"
+      style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color:#000000; font-size: 40px; font-weight: bolder;"
+      href="{% url 'plagiarism-check-mainpage' %}">
       <!-- {% load static %} <img height="50px" width="50px" src="{% static "pc/product-hunt-brands.svg" %}" alt="logo" /> -->
       <i class="bi bi-clipboard-check-fill"></i> Plag Checker</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -98,45 +119,57 @@ th {
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav" style="margin-left: auto;">
-        <li class="nav-item nav-one" >
-          <a type="button" style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link btn btn-info" href="{% url 'compare' %}">Compare Documents</a>       
+        <li class="nav-item nav-one">
+          <a type="button"
+            style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"
+            class="nav-link btn btn-info" href="{% url 'compare' %}">Compare Documents</a>
         </li>
         <!-- <li class="nav-item nav-one">
           <a type="button" style="color: #000000; font-weight: bolder; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" class="nav-link btn btn-warning" href="{% static 'pc/login.html' %}">Login</a>
         </li> -->
-     </ul>
+      </ul>
     </div>
   </nav>
-   <div id="header">
+  <div id="header">
     <div class="content-fluid justify-content-between">
-			<p class="bg"
-				style="text-align: center; font-weight: bolder;font-size:10cqb ; font-family: Trirong, serif; margin: 5% auto;">Welcome To Plag Checker
-	    </p>
-		<hr>
-</div>
+      <p class="bg"
+        style="text-align: center; font-weight: bolder;font-size:10cqb ; font-family: Trirong, serif; margin: 5% auto;">
+        Welcome To Plag Checker
+      </p>
+      <hr>
+    </div>
 
-<div  class="container" style="background-image: url(../static/pc/copy.JPG); background-color: rgb(31, 30, 30); background-repeat: no-repeat; background-position: top right; background-size: contain;">
-  
-  <h2 style="box-shadow: black;font-family: Arial black, Helvetica, sans-serif; font-weight: bolder; font-size:30px;"><span style="color:#00bbff">Plag Checker </span>Features..</h2>
-				<hr>
-			<h5 style=" padding: 10px 5px;">
-				<ul class="bg li" style="list-style-type: none;font-size: larger;">
-				<li><i class="bi bi-cursor-fill"></i> Simple and Free Plagiarism Detection Tool</li> 	
-				<li><i class="bi bi-cursor-fill"></i> AI powered Plagiarism Detection Mechanism</li>
-				<li><i class="bi bi-cursor-fill"></i> Fast and Accurate report generator</li>
-			    </ul>
-			</h5>
-</div>
-			<hr>
-    <h3 class="container">To use this plagiarism checker, please copy and paste your text in the box below, then click on the “Check Plagiarism” button, sit back and watch as your article undergoes a free plagiarism scan.   
+
+    <div class="container"
+      style="background-image: url(../static/pc/copy.JPG); background-color: rgb(31, 30, 30); background-repeat: no-repeat; background-position: top right; background-size: contain;">
+
+
+      <h2
+        style="box-shadow: black;font-family: Arial black, Helvetica, sans-serif; font-weight: bolder; font-size:30px;">
+        <span style="color:#00bbff">Plag Checker </span>Features..
+      </h2>
+      <hr>
+      <h5 style=" padding: 10px 5px;">
+        <ul class="bg li" style="list-style-type: none;font-size: larger;">
+          <li><i class="bi bi-cursor-fill"></i> Simple and Free Plagiarism Detection Tool</li>
+          <li><i class="bi bi-cursor-fill"></i> AI powered Plagiarism Detection Mechanism</li>
+          <li><i class="bi bi-cursor-fill"></i> Fast and Accurate report generator</li>
+        </ul>
+      </h5>
+    </div>
+    <hr>
+    <h3 class="container">To use this plagiarism checker, please copy and paste your text in the box below, then click
+      on the “Check Plagiarism” button, sit back and watch as your article undergoes a free plagiarism scan.
     </h3>
-    <hr>  
-   </div> 
-   <hr>
-   <div class="content-1 container" style="margin: 10px auto;">
+    <hr>
+  </div>
+  <hr>
+  <div class="content-1 container" style="margin: 10px auto;">
     <div class="col-md-6 offset-3 text-content">
-      
-      <h3 class="container-fluid" style="font-weight: bolder;">Choose a file or copy-paste text to find plagiarism percentage!</h3>
+
+
+      <h3 class="container-fluid" style="font-weight: bolder;">Choose a file or copy-paste text to find plagiarism
+        percentage!</h3>
       <div class="tab-content-1">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
@@ -145,229 +178,603 @@ th {
           </li>
           <li class="nav-item">
             <a class="nav-link" id="file-tab" data-toggle="tab" href="#file-input-ws" role="tab"
-              aria-controls="file-input-ws" aria-selected="false" style="color:#6c56e6;" onclick="makeVisible()">File Upload</a>
+              aria-controls="file-input-ws" aria-selected="false" style="color:#6c56e6;" onclick="makeVisible()">File
+              Upload</a>
           </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">          
+          <div class="tab-pane fade show active" id="text-input-ws" role="tabpanel" aria-labelledby="text-tab">
             <form id="form1-ws" action="/test/#taru" method="POST">
-              {% csrf_token %}               
-              <textarea style='padding:auto;' onkeyup="word_checker(this)" maxlength="" id="text-1" name="q" placeholder="Copy Paste the text here.." required></textarea>
+              {% csrf_token %}
+              <textarea style='padding:auto;' onkeyup="word_checker(this)" maxlength="" id="text-1" name="q"
+                placeholder="Copy Paste the text here.." required></textarea>
               <p id="ch">1500 Words Remaining </p>
               <br>
-                <!-- button input text check plagiarism -->
-             
-                <button type="submit" oninput="reportbtn()" form="form1-ws" id="submit-button-1" class="btn" style="background-color:#6c56e6; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 0 auto;" name="check-plag">
+              <!-- button input text check plagiarism -->
+
+
+              <button type="submit" oninput="reportbtn()" form="form1-ws" id="submit-button-1" class="btn"
+                style="background-color:#6c56e6; font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin: 0 auto;"
+                name="check-plag">
                 Check Plagiarism
               </button>
-             
-                </form>
-              <!-- text input report -->
 
-                <!-- <form method="POST" action="{% url 'report' %}">
-                  {% csrf_token %}
-                  <input type="hidden" name="next" value="{% url 'report' %}">
-                  <button type="submit" id="report" class="btn hidden" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto;" name="report-gen" href=" {% url 'report' %} ">Plagiarism Report</button>
-                </form>  -->
-            
-              <!-- ...... -->
-          </div>        
+
+            </form>
+        
+          </div>
           <div class="tab-pane fade" id="file-input-ws" role="tabpanel" aria-labelledby="file-tab">
             <form id="form2-ws" action="/filetest/#taru" enctype="multipart/form-data" method="POST" name="frmFile">
               <p id="file-result"></p>
-            {% csrf_token %}
-            <!-- <input id="id_docfile" required type="file" name="docfile" accept=".doc, .docx, .pdf, .txt"/> -->
-            <div><input type="file" name="docfile" id="docfile" onsubmit="return validate()" required class="demoInputBox" accept=".doc, .docx, .pdf, .txt"/> 
-              <div id="file_error">
-                {% if file_size_error %}
-                <script>
+              {% csrf_token %}
+              <!-- <input id="id_docfile" required type="file" name="docfile" accept=".doc, .docx, .pdf, .txt"/> -->
+              <div><input type="file" name="docfile" id="docfile" onsubmit="return validate()" required
+                  class="demoInputBox" accept=".doc, .docx, .pdf, .txt" />
+                  <h6>File size shouldn't exceed 2MB</h6>
+                <div id="file_error">
+                  {% if file_size_error %}
+                  <script>
                     alert('{{ file_size_error }}');
-                </script>
-                {% endif %}
-              </div>
-              <div id="word_error">
-                {% if word_count_error %}
-                <script>
+                  </script>
+                  {% endif %}
+                </div>
+                <div id="word_error">
+                  {% if word_count_error %}
+                  <script>
                     alert('{{ word_count_error }}');
-                </script>
-                {% endif %}
+                  </script>
+                  {% endif %}
+                </div>
               </div>
-            </div>
-                   
-             <!-- button input text check plagiarism -->
-          
-             <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2" style="background-color:#6c56e6; font-weight: bold; margin: 0 auto;">
-              Check Plagiarism
-            </button>  
-          </form>         
+
+
+              <!-- button check plagiarism -->
+
+
+              <button type="submit" form="form2-ws" id="submit-button-2" class="btn submit-button-2"
+                style="background-color:#6c56e6; font-weight: bold; margin: 0 auto;">
+                Check Plagiarism
+              </button>
+            </form>
           </div>
-
-
         </div>
       </div>
     </div>
     <br id="taru">
-    <div class="container result-div" style="margin-top: 100px;"> 
-      <div class="row">
-        <div style="overflow: visible; background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; margin: 0 auto;" class="col-md-6 result-1">
-          <h2 style="font-weight: bolder; background-color: #f9f7ff; font-family: Arial, Helvetica, sans-serif; ">PLAGIARIZED CONTENT FROM:</h2>
+    <div class="container result-div" style="margin-top: 100px; ">
+      <div class="row" >
+        <div
+          style="overflow: visible; background-color: #ffffff; border: 1px solid #402ea6; color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; margin: 0 auto;"
+          class="col-md-6 result-1">
+          <h2 style="font-weight: bolder; background-color: #f9f7ff; font-family: Arial, Helvetica, sans-serif; ">
+            PLAGIARIZED CONTENT FROM:</h2>
           <hr>
           {% if links %}
-              {% for link in links %} 
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
-              {% endfor %}
-              {% else %}
-              <br>
-              <h4 style="font-weight: bold; margin: 0 auto;">NO MATCH FOUND</h4>
-              {% endif %}
-          <!-- <ul class="output-list-1" style="list-style:square; text-align: justify;max-width:min-content; padding: 20px;">
-            {% for link in links %}            
-              <li><a href="{{ links }}" target="_blank" style="text-decoration:underline; color: #6c56e6;">{{ link }}</a></li>
-              {% endfor %} -->
-              <hr>
-              <!-- <h5>{{ text }}</h5>     -->
-      </div>
-      <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
-        <p class="output-per-tot">{{ totalPercent }}%</p>
-        <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
-        <p class="output-per-tot">{{ uniquePercent }}%</p>
-        <h3 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h3>
-        <!-- <ul class="output-list-1" style="list-style:square; text-align: justify;">
+          {% for link in links %}
+          <ul class="output-list-1" style="list-style:square; text-align: justify;">
+            <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a>
+            </li>
+          </ul>
+          {% endfor %}
+          {% else %}
+          <br>
+          <h4 style="font-weight: bold; margin: 0 auto;">NO MATCH FOUND</h4>
+          {% endif %}
+        <hr>
+        </div>
+        <div class="col-md-6 result-2" style="text-align: center; align-items: center;">
+          <p class="output-per-tot">{{ totalPercent }}%</p>
+          <h3 style="font-family: Arial black, Helvetica, sans-serif;">Plagiarized Content</h3>
+          <p class="output-per-tot">{{ uniquePercent }}%</p>
+          <h3 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h3>
+          <!-- <ul class="output-list-1" style="list-style:square; text-align: justify;">
         <li> {{ text }}</li>    -->
-        
-      </div>    
-      </div>
+
+
+        </div>
       </div>
 
-      <!-- action="{% url 'report' %}" -->
-         
-      <form method="POST" action="{% url 'report' %}" >
-        {% csrf_token %}
-        <input type="hidden" name="next" form="form2-ws" value="{% url 'report' %}">
-        <button type="submit" id="report" class="btn hidden" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex;
-        justify-content: center;
-        align-items: center;" name="q" ><a style="text-decoration: none; color: white;" >View Plagiarism Report</a></button>
-      </form> 
-      <br>
-      <div class="container" id="view" style="margin: 0 auto; text-align: center;"> 
-       
-      <h2 style="background-color: #6c56e6; text-align: center; color: #ffffff; margin-top: 100px;">PLAGIARISM ANALYSIS REPORT</h2>
-        <h4 style="color: #000000; text-align: left;">CONTENT CHECKED FOR PLAGIARISM:</h4>
-        <hr>
-        <h5 style="border: #606060; text-align: justify;"> {{ text }}</h5> 
-       
-        <table>
-          <tr style="text-align: justify;color: #000;">
-            <th>CONTENT CHECKED FOR PLAGIARISM</th>
-            <th>MATCHED SOURCES</th>
-            <th>MATCHED SCORE</th>
-          </tr>
-           
-          <tr style="text-align: justify;">
-            
-            <td style="color: red; text-decoration: underline;">
-              {% for key, value in tracker.items %}
-              <ul class="output-list-1" style="list-style:square; text-align: justify;">
-               <li>{{ key }}</li>
-              </ul>
-              {% endfor %}
-              
-            </td>
-            <td style="width:20px;">
-              {% if links %}
-              {% for link in links %} 
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
-              {% endfor %}
-              {% else %}
-              <h6>NO MATCH FOUND</h6>
-              {% endif %}
-            </td>
-            <td style="height:30px; margin: 20px 0 ">
-            {% if scores %}
-                <ul class="output-list-1" style="list-style:none; text-align: justify;">
-                {% for score in scores %}
-                  <li style="color: #aa1b1b;">{{ score }}</li>
-                {% endfor %}
-                </ul>
+    </div>
+</div>
+
+    <!--button view report -->
+          
+  <button type="submit" id="report" class="btn hidden" style="background-color:#56b4e6; font-family: Arial, Helvetica, sans-serif ;font-weight: bold; margin: 0 auto; display: flex;
+    justify-content: center;align-items: center;" onclick="scrollToSection('downloadReport')">VIEW PLAGIARISM REPORT</button>
+
+    <!-- ...... -->
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container" id="downloadReport" style="margin:o auto;">
+      <h1 class="report-title" style="margin-top: 5px;">PLAGIARISM ANALYSIS REPORT</h1>
+      <hr>
+      <table class="input-table">
+        <tr>
+          <td>
+            <h3 class="input-heading">YOUR INPUT</h3>
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h5 class="input-text">{{ text }}</h5>
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <table class="results-table">
+        <tr>
+          <th>CONTENT CHECKED FOR PLAGIARISM</th>
+          <th>MATCHED SOURCES</th>
+          <th>MATCHED SCORE</th>
+        </tr>
+        <tr>
+          <td class="checked-content">
+            {% for key, value in tracker.items %}
+            <ul>
+              <li>{{ key }}</li>
+            </ul>
+            {% endfor %}
+          </td>
+          <td class="matched-sources">
+            {% if links %}
+            {% for link in links %}
+            <ul>
+              <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+            </ul>
+            {% endfor %}
             {% else %}
-              <h6>0</h6>
+            <h6>NO MATCH FOUND</h6>
             {% endif %}
-            </td>
-            
-            
-          </tr> 
+          </td>
+          <td class="matched-score">
+            {% if scores %}
+            <ul>
+              {% for score in scores %}
+              <li>{{ score }}</li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <h6>0</h6>
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+        <table class="plagiarism-summary" style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
+          <tr>
+                          
+          <th style="font-family: Arial black, Helvetica, sans-serif; padding-right: 0px;">Unique Content</th>
+             
+         
+              <td style="color: #000000;">
+                  <p style="font-size: 25px;
+                  color: #22e6b8;
+                  padding-top: 30px;
+                  padding-bottom: 0;
+                  text-align: center;
+                  width: 125px;
+                  height: 125px;
+                  border: 7px solid #4431ad;
+                  border-radius: 50%">{{ uniquePercent }}%</p>
+              </td>
+
+              <th style="font-family: Arial black, Helvetica, sans-serif;  padding-right: 0px">Plagiarized Content</th>
+              <td style="color: #000000;">
+                <p style="font-size: 25px;
+                color: #ff6536;
+                padding-top: 30px;
+                padding-bottom: 0;
+                text-align: center;
+                width: 125px;
+                height: 125px;
+                border: 7px solid #4431ad;
+                border-radius: 50%">{{ totalPercent }}%</p>
+              </td>
+              
+          </tr>
          
         </table>
-
-        <!-- <table>
-          <tr style="text-align: justify;color: #000;">
-            <th>SIMILAR CONTENT</th>
-            <th>MATCHED SOURCES</th>
-            <th>MATCHED SCORE</th>
-          </tr>
-          <tr style="text-align: justify;">
-          {% for key, value in tracker.items %} 
-            <td style="color: red; text-decoration: underline;">{{key}}</td>
-            <td>
-              {% for link in links %} 
-              
-              <ul class="output-list-1" style="list-style:square; text-align: justify;"> 
-                  <li><a href="{{ link }}" target="_blank" style="text-decoration:underline; color: #5874ff;">{{ link }}</a></li>              
-              </ul>
-              
-              
-              {% endfor %}
-               </td>
-               <td>
-                {% for score in scores %}
-              <ul class="output-list-1" style="list-style:none; text-align: justify;">
-                           
-                  <li style="color: #aa1b1b;">{{ score}}</li>
-                </ul>
-              {% endfor %}
-            
-              </td>
-          </tr> 
-          {% endfor %}
-        </table> -->
-
-
-
-   
-             <hr>
-             <table style="border: 1px solid black;text-align: justify; width: 100%; background-color: white;">  
-               <tr style="border-collapse: #000;">
-                               
-                  <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; color: #000000;">
-                    <h5 style="font-family: Arial black, Helvetica, sans-serif;">Unique Content</h5>
-                  </th>
-                  <td style="color: #000000;">
-                    <p class="output-per-tot">{{ uniquePercent }}%</p>
-                  </td>
-
-                  <th style="font-family: Arial black, Helvetica, sans-serif;text-align: center; width: fit-content;color: #000000;">
-                    <h5>Plagiarized Content:</h5>
-                  </th>
-                  <td style="color: #000000;">
-                    <p class="output-per-tot">{{ totalPercent }}%</p>
-                  </td>
-               </tr>
-              
-      </table>
-
-      
     </div>
-  </div>
-    <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;" class="container-fluid d-flex justify-content-between flex-wrap">
-      <div><strong>Copyright &copy; 2023.</strong> All rights reserved.</div>
-  
-      <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
-    </footer>
-  
+          
+      <br>
+      <br>
+ 
+
+   <button type="submit" class="btn btn-primary downloadButton" style="margin: 0 auto; display: flex;
+    justify-content: center;align-items: center; margin-bottom: 20px;" name="q"> DOWNLOAD REPORT </button>
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
+
+   <!-- ///////////////////// IMPORTANT ///////////////////////-->
+
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+   <script>
+    
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+   </script>
+
+<!-- <script>
+
+
+      var x = document.getElementById("downloadReport");
+      x.style.display = "none";
+
+
+      $('.downloadButton').on('click', function () {
+        $('<a />').attr({
+          download: 'Plag_report.html',
+          // href: "data:text/html," + $('#downloadReport').html()
+          href: "data:text/html;charset=utf-8," + encodeURIComponent('<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="style.css"></head><body>' + $('#downloadReport').html() + '</body></html>')
+        })[0].click()
+      });
+  </script> -->
+
+
+  <!-- <script>
+    $(document).ready(function() {
+      $('.downloadButton').on('click', function() {
+        // Get the CSS styles
+        var styles = '<style>' + getCSSStyles() + '</style>';
+    
+        // Create a new <a> element
+        var link = $('<a />').attr({
+          download: 'Plag_report.html',
+          href: "data:text/html;charset=utf-8," + encodeURIComponent('<!DOCTYPE html><html><head>' + styles + '</head><body>' + $('#downloadReport').html() + '</body></html>')
+        })[0];
+    
+        // Trigger the click event to initiate the download
+        link.click();
+      });
+    });
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  $('.downloadButton').on('click', function() {
+    // Get the CSS styles
+    var styles = '<style>' + getCSSStyles() + '</style>';
+
+    // Get the HTML content
+    var htmlContent = $('#downloadReport').html();
+
+    // Create a new jsPDF instance
+    var doc = new jsPDF();
+
+    // Add the HTML content to the PDF
+    doc.html(styles + htmlContent, {
+      callback: function() {
+        // Save the PDF file
+        doc.save('Plag_report.pdf');
+      }
+    });
+ 
+
+    function getCSSStyles() {
+      // Replace this with your CSS styles
+      var cssStyles = `
+
+      body {
+  zoom: 40%;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.report-title {
+  text-align: center;
+  background-color: #6c56e6;
+  color: #ffffff;
+  margin: 10px;
+}
+
+.input-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.input-heading {
+  color: #000000;
+}
+
+.input-text {
+  text-align: justify;
+}
+
+.results-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-align: justify;
+  padding: 16px;
+}
+
+.results-table th {
+  font-weight: bold;
+}
+
+.checked-content {
+  color: red;
+  text-decoration: underline;
+  text-align: justify;
+}
+
+.matched-sources {
+  font-size: 35px;
+  text-decoration: underline;
+  color: #5874ff;
+  padding-top: 43px;
+  margin-left: 20px;
+  margin-top: 5px;
+  text-align: justify;
+  width: 150px;
+  height: 100px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+  list-style: square;
+  text-align: justify;
+}
+
+.matched-score {
+  font-size: 35px;
+  padding-top: 43px;
+  margin-left: 20px;
+  margin-top: 5px;
+  text-align: justify;
+  width: 150px;
+  height: 100px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+  list-style: square;
+  text-align: justify;
+  text-decoration: underline;
+  color: #5874ff;
+}
+
+.plagiarism-summary {
+  border: 1px solid black;
+  text-align: justify;
+  width: 100%;
+  background-color: white;
+}
+
+.summary-heading {
+  font-family: Arial black, Helvetica, sans-serif;
+}
+
+.summary-percent {
+  font-size: 35px;
+  color: #9584f6;
+  padding-top: 43px;
+  margin-left: 175px;
+  margin-top: 5px;
+  text-align: center;
+  width: 155px;
+  height: 125px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+}
+      `;
+
+      return cssStyles;
+}
+</script> -->
+ 
+    
+    
+<!-- /////////////////////// -->
+
+ 
+<!-- <script>
+
+var x = document.getElementById("downloadReport");
+x.style.display = "none";
+
+  $('.downloadButton').on('click', function () {
+ 
+    // Create a new <a> element
+    var link = $('<a />').attr({
+      download: 'Plag_report.html',
+      href: "data:text/html;charset=utf-8," + $('#downloadReport').html()
+    })[0];
+
+    // Trigger the click event to initiate the download
+    link.click();
+  });
+
+
+</script>  -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+<script>
+//   $('.downloadButton').on('click', function () {
+//     // Apply styles to the report element
+//     $('#downloadReport').css({
+//       margin: '50px auto',
+//       maxWidth: '800px',
+//       // Add more CSS attributes as needed
+//     });
+
+//     // Generate the PDF file by getting the updated HTML content of the report
+//     var updatedHTML = '<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><style>body { zoom: 50%; background-color: #ffffff; color: #000000; font-family: \'Gill Sans\', \'Gill Sans MT\', Calibri, \'Trebuchet MS\', sans-serif; } .container { margin: 50px auto; max-width: 800px; text-align: justify; } h2 { background-color: #6c56e6; color: #ffffff; margin: 10px; } table { border-collapse: collapse; font-family: Arial, Helvetica, sans-serif; border: 1px solid #696464; font-size: 50px; text-align: center; padding: 16px; } th { font-weight: bold; } ul { color: red; } .result-2 { text-align: center; align-items: center; padding-top: 25px; } .result-2 p, .result-2 h3 { font-family: Arial black, Helvetica, sans-serif; color: #9584f6; padding-top: 43px; margin-left: 20px; margin-top: 5px; text-align: center; width: 150px; height: 100px; border: 7px solid #4431ad; border-radius: 50%; }</style></head><body>' + $('#downloadReport').html() + '</body></html>';
+
+//     // Create a new jsPDF instance
+//     var doc = new jsPDF();
+
+//     // Convert the HTML content to PDF using the html() method
+//     doc.html(updatedHTML, {
+//       callback: function () {
+//         // Save the PDF file
+//         doc.save('Plag_report.pdf');
+//       }
+//     });
+//   });
+// </script>
+
+    
+    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+<script>
+
+  $('.downloadButton').on('click', function () {
+    // Target the element containing the report content
+    var element = document.getElementById("downloadReport");
+
+    // Set the options for the PDF generation
+    var options = {
+      margin: [20, 20, 20, 20],  // Margins (top, left, bottom, right)
+      filename: 'Plag_report.pdf',  // File name
+      image: { type: 'jpeg', quality: 0.98 },  // Image type and quality
+      html2canvas: { scale: 2 },  // Scale factor for better quality
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },  // PDF unit, format, and orientation
+      style: `
+              body {
+  zoom: 40%;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+.report-title {
+  text-align: center;
+  background-color: #6c56e6;
+  color: #ffffff;
+  margin: 10px;
+}
+
+.input-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.input-heading {
+  color: #000000;
+}
+
+.input-text {
+  text-align: justify;
+}
+
+.results-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+  text-align: justify;
+  padding: 16px;
+}
+
+.results-table th {
+  font-weight: bold;
+}
+
+.checked-content {
+  color: red;
+  text-decoration: underline;
+  text-align: justify;
+}
+
+.matched-sources {
+  font-size: 35px;
+  text-decoration: underline;
+  color: #5874ff;
+  padding-top: 43px;
+  margin-left: 20px;
+  margin-top: 5px;
+  text-align: justify;
+  width: 150px;
+  height: 100px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+  list-style: square;
+  text-align: justify;
+}
+
+.matched-score {
+  font-size: 35px;
+  padding-top: 43px;
+  margin-left: 20px;
+  margin-top: 5px;
+  text-align: justify;
+  width: 150px;
+  height: 100px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+  list-style: square;
+  text-align: justify;
+  text-decoration: underline;
+  color: #5874ff;
+}
+
+.plagiarism-summary {
+  border: 1px solid black;
+  text-align: justify;
+  width: 100%;
+  background-color: white;
+}
+
+.summary-heading {
+  font-family: Arial black, Helvetica, sans-serif;
+}
+
+.summary-percent {
+  font-size: 35px;
+  color: #9584f6;
+  padding-top: 43px;
+  margin-left: 175px;
+  margin-top: 5px;
+  text-align: center;
+  width: 155px;
+  height: 125px;
+  border: 7px solid #4431ad;
+  border-radius: 50%;
+} `
+    };
+
+    // Generate the PDF
+    html2pdf().set(options).from(element).save();
+  });
+</script> 
+</div>
+  <footer style="background-color: #000000; color: white; margin: 0 auto; padding: 10px 50px;"
+    class="container-fluid d-flex justify-content-between flex-wrap">
+    <div><strong>Copyright &copy; 2023.</strong> All rights reserved.</div>
+
+
+    <div>Plagiarism Detection Tool by <strong>BSA Crescent University</strong></div>
+  </footer>
+
+
+
 
   <script>
     function makeVisible() {
@@ -375,18 +782,22 @@ th {
       document.getElementById("submit-button-1").style.visibility = "hidden";
     }
 
-    function makeInvisible(){
+
+    function makeInvisible() {
       document.getElementById("submit-button-2").style.visibility = "hidden";
       document.getElementById("submit-button-1").style.visibility = "visible";
     }
 
-    function reportbtn(){
+
+    function reportbtn() {
       // document.getElementsById("report").style.visibility = 'visible';
       document.getElementById("report").classList.remove("hidden")
     }
 
 
-    function word_checker(self){
+
+
+    function word_checker(self) {
       elem = document.getElementById("text-1");
       var word = elem.value;
       // number of words in the text
@@ -394,12 +805,13 @@ th {
       var num_words = spaces ? spaces.length : 0;
       // var num_words = word.split(/\s+/).length;
       // lenght_of_word = word.length;
-  
-      if(num_words > 1500){
+
+
+      if (num_words > 1500) {
         alert("You have exceeded the word limit. Please enter a text less than 1500 words.");
         elem.value = "";
       }
-      else{
+      else {
         document.getElementById("ch").innerHTML = 1500 - num_words + " Words Remaining";
       }
     }
@@ -413,11 +825,13 @@ th {
         document.getElementById("file_error").innerHTML = "File size is greater than 2MB";
         document.querySelector(".demoInputBox").style.borderColor = "#FF0000";
         return false;
-       } 
+      }
       return true;
-}
+    }
+
 
   </script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <!-- JQuery -->
@@ -432,4 +846,8 @@ th {
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 </body>
 
+
 </html>
+
+
+
